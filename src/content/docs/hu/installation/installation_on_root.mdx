@@ -1,0 +1,289 @@
+---
+title: How To Install CachyOS & Partition Guide
+description: Erase Disk Installation
+---
+
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::caution
+Secure boot must be disabled when installing CachyOS. To setup secure boot after install. Check [Secure Boot Setup.](/configuration/secure_boot_setup)
+:::
+
+:::tip
+It is highly recommended to restart the ISO after a failed installation attempt.
+
+Otherwise, continuous errors can happen during the installation process.
+
+This happens because the installer doesn't properly unmount partitions on a failed install.
+
+:::
+
+## Erase Disk
+
+The "Erase Disk" Option in Calamares will wipe the selected disk and install CachyOS to the target.
+
+<Steps>
+
+1. Boot into the ISO and click on **Launch Installer**.
+
+2. Select the preferred **Boot Manager**. Check the [Boot Managers](/installation/boot_managers) section for more information.
+
+3. Set the preferred **Language** and **Region/Timezone**.
+
+4. Configure **Keyboard Layout**.
+
+5. Select **Erase Disk** and choose a [Filesystem](/installation/filesystem).
+
+6. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+
+7. Customize which packages should or should not be installed during the installation process.
+
+8. Setup login credentials.
+
+9. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+
+</Steps>
+
+## Manual Partitioning
+
+### UEFI/GPT
+
+The partition table for each boot manager varies. Please follow the correct instructions for each.
+
+<Tabs>
+
+<TabItem label='systemd-boot & rEFInd & Limine'>
+
+<Steps>
+
+1. Boot into the ISO and click the **Launch Installer** button
+
+2. Set the preferred **Language** and **Region/Timezone**.
+
+3. Configure **Keyboard Layout**.
+
+4. Select **Manual partitioning**.
+
+5. Create a new partition with the following:
+    * Size: ***2048MiB***
+    * Filesystem: ***FAT32***
+    * Mount point: ***/boot***
+    * Flags: **boot**
+
+6. Create another partition for ***root***:
+    * Size: ***At least 20000MiB***
+    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
+    * Mount point: ***/***
+    * Flags:
+
+7. Double check that ***Install boot loader on:*** is pointing to /boot
+
+8. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+
+9. Customize which packages should or should not be installed during the installation process.
+
+10. Setup login credentials.
+
+11. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+
+</Steps>
+
+</TabItem>
+
+<TabItem label='GRUB'>
+
+<Steps>
+
+1. Boot into the ISO and click the **Launch Installer** button
+
+2. Set the preferred **Language** and **Region/Timezone**.
+
+3. Configure **Keyboard Layout**.
+
+4. Select **Manual partitioning**.
+
+5. Create a new partition with the following:
+    * Size: ***At least 100MiB***
+    * Filesystem: ***FAT32***
+    * Mount point: ***/boot/efi***
+    * Flags: **boot**
+
+6. Create another partition for ***root***:
+    * Size: ***At least 20000MiB***
+    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
+    * Mount point: ***/***
+    * Flags:
+
+7. Double check that ***Install boot loader on:*** is pointing to /boot/efi
+
+8. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+
+9. Customize which packages should or should not be installed during the installation process.
+
+10. Setup login credentials.
+
+11. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+### MBR/BIOS
+
+<Tabs>
+
+<TabItem label='GRUB'>
+
+<Steps>
+
+1. Boot into the ISO and click the **Launch Installer** button
+
+2. Set your preferred **Language** and **Region/Timezone**.
+
+3. Configure your **Keyboard Layout**.
+
+4. Select **Manual partitioning**.
+
+5. Create a new partition with the following:
+    * Size: ***At least 20000MiB***
+    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
+    * Mount point: ***/***
+    * Flags:
+
+6. Double check that ***Install boot loader on:*** is pointing to your boot drive e.g: /dev/sda
+
+7. Pick the **Desktop Environment** you'd like to use, see [Desktop Environments](/installation/desktop_environments).
+
+8. Select the specific packages you wish to install from the provided list, and deselect any that you do not require.
+
+9. Setup your login credentials.
+
+10. Review the installation summary on the Overview Page carefully. If all the settings look correct for you, proceed with the installation by clicking on ***Install Now***. Otherwise, go back and make any necessary changes.
+
+</Steps>
+
+</TabItem>
+
+<TabItem label='Limine'>
+
+<Steps>
+
+1. Boot into the ISO and click the **Launch Installer** button
+
+2. Set your preferred **Language** and **Region/Timezone**.
+
+3. Configure your **Keyboard Layout**.
+
+4. Select **Manual partitioning**.
+
+5. Create a new partition with the following:
+    * Size: ***At least 1000MiB***
+    * Filesystem: **FAT32**
+    * Mount point: ***/boot***
+    * Flags: **boot**
+
+6. Create another partition for ***root***:
+    * Size: ***At least 20000MiB***
+    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
+    * Mount point: ***/***
+    * Flags:
+
+7. Double check that ***Install boot loader on:*** is pointing to your boot drive e.g: /dev/sda
+
+8. Pick the **Desktop Environment** you'd like to use, see [Desktop Environments](/installation/desktop_environments).
+
+9. Select the specific packages you wish to install from the provided list, and deselect any that you do not require.
+
+10. Setup your login credentials.
+
+11. Review the installation summary on the Overview Page carefully. If all the settings look correct for you, proceed with the installation by clicking on ***Install Now***. Otherwise, go back and make any necessary changes.
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+## Dual Booting
+
+*After manual partitioning, additional setup may be required to configure a dual boot system, especially with `systemd-boot` and `GRUB`.*
+
+<Tabs>
+    <TabItem label='systemd-boot'>
+        *We need to copy the Windows EFI binaries to the Linux EFI partition so that the boot manager can recognize them.*
+
+        <Steps>
+        1. Locate the `Windows EFI partition` with `lsblk`
+
+            ```sh title='Example'
+            ❯ lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT
+            NAME        FSTYPE   SIZE MOUNTPOINT
+            zram0               15.3G [SWAP]
+            nvme0n1            476.9G
+            ├─nvme0n1p1 vfat     100M
+            ├─nvme0n1p2           16M
+            ├─nvme0n1p3 ntfs   234.4G
+            ├─nvme0n1p4 ntfs     830M
+            ├─nvme0n1p5 vfat       2G /boot
+            └─nvme0n1p6 btrfs  239.6G /var/tmp
+            ```
+
+            *EFI partitions are almost always formatted as `FAT32/vfat`, and since nvme0n1p1 does not have a Linux mount point, assume that this partition is the `Windows EFI partition`.*
+
+        2. Temporarily mount the `Windows EFI partition`.
+
+            ```sh
+            ❯ sudo mount /dev/nvme0n1p1 /mnt/WinBoot # Replace `nvme0n1p1` with the partition of Windows's EFI partition
+            ```
+
+        3. Copy the EFI binaries from the `Windows EFI partition` to the `Linux EFI partition`.
+
+            ```sh
+            ❯ sudo cp -r /mnt/WinBoot/EFI/* /boot/EFI
+            ```
+
+        4. Unmount the previously mounted partition, and Windows should appear in the boot menu on the next startup.
+
+            ```sh
+            ❯ sudo umount /mnt/WinBoot
+            ```
+
+        </Steps>
+    </TabItem>
+
+    <TabItem label='GRUB'>
+        *GRUB uses os-prober to automatically detect the Windows EFI partition and add it to the boot menu.*
+
+        <Steps>
+        1. Install and execute `os-prober`
+
+            ```sh
+            ❯ sudo pacman -S os-prober
+            ❯ sudo os-prober
+            ```
+
+        2. Enable `os-prober` in the GRUB configuration file
+
+            ```sh title='Press CTRL+S to save and CTRL+Q to exit from Micro'
+            ❯ sudo micro /etc/default/grub
+            # /etc/default/grub
+            # Probing for other operating systems is disabled for security reasons. Read
+            # documentation on GRUB_DISABLE_OS_PROBER, if still want to enable this
+            # functionality install os-prober and uncomment to detect and include other
+            # operating systems.
+            GRUB_DISABLE_OS_PROBER=false
+
+            ❯ sudo grub-mkconfig -o /boot/grub/grub.cfg
+            ```
+
+            **Windows should now be added to the boot menu.**
+
+        </Steps>
+    </TabItem>
+</Tabs>
+
+## More Information
+
+- [Lord Vexy's dual boot installation walkthrough with the rEFInd boot manager](https://www.youtube.com/watch?v=0Toaq3Vn5qs)

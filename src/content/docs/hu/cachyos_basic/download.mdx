@@ -1,0 +1,125 @@
+---
+title: Downloads and Validation
+description: Download and Validation of CachyOS ISO.
+---
+
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Downloading ISO
+
+CachyOS ISO can be obtained from the following sources:
+
+*   [Website](<https://cachyos.org/download>)
+*   [SourceForge](<https://sourceforge.net/projects/cachyos-arch/files/>)
+*   [CachyOS Mirror](<https://mirror.cachyos.org/ISO/>)
+
+## Verifying ISO integrity with SHA256
+
+:::caution[WARNING]
+Always take an extra step to verify the ISOs integrity to avoid any undesired issues at installation or while creating a bootable media.
+:::
+
+**Current ISO Version:** `250422`
+
+**SHA256 Hash:** `c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe`
+
+<Tabs>
+
+<TabItem label='Windows'>
+
+<Steps>
+
+1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash **(Open it with a Text Editor e.g: Notepad).**
+2. Open CMD or PowerShell as Administrator and [navigate](<https://www.wikihow.com/Change-Directories-in-Command-Prompt>) to the path where the ISO and SHA256 files are stored.
+3. Execute the following command:
+   ```powershell
+   # Example:
+   certUtil -hashfile cachyos-desktop-linux-250422.iso SHA256
+   ```
+4. Compare the certUtil hash output to the one from the downloaded file in **Step 1.** If they match, you can proceed with the CachyOS installation.
+
+</Steps>
+
+</TabItem>
+
+<TabItem label='Linux'>
+
+<Steps>
+
+1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash.
+2. Open a terminal and navigate to the directory containing the `.sha256` file and execute the following commands:
+   ```sh
+   # Example:
+   cd Downloads/
+   cat cachyos-desktop-linux-250422.iso.sha256
+   # c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe
+   ```
+3. Compare the output from **Step 2** and execute the following command to check what's the current hash in the ISO file.
+   ```sh
+   # Example:
+   sha256sum cachyos-desktop-linux-250422.iso
+   ```
+4. If the hashes from **Step 2** and **Step 3** match, you can proceed with the CachyOS installation.
+
+</Steps>
+
+</TabItem>
+
+<TabItem label='macOS'>
+
+<Steps>
+
+1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash.
+2. Open a terminal and navigate to the directory containing the `.sha256` file and execute the following commands:
+   ```sh
+   # Example:
+   cd Downloads/
+   cat cachyos-desktop-linux-250422.iso.sha256
+   # c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe
+   ```
+3. Compare the output from **Step 2** and execute the following command to check what's the current hash in the ISO file.
+   ```sh
+   # Example:
+   shasum -a 256 cachyos-desktop-linux-250422.iso
+   ```
+4. If the hashes from **Step 2** and **Step 3** match, you can proceed with the CachyOS installation.
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
+
+## Verify ISO Image Authenticity (Linux)
+
+To verify the authenticity of the ISO file to be sure that the actual one has been released by the official CachyOS development team:
+
+<Steps>
+
+1. Import the GPG key for verifying the authenticity:
+
+   ```shell
+   gpg --keyserver hkps://keys.openpgp.org --recv-key F3B607488DB35A47
+   ```
+
+2. Download the ISO file and its `.sig` signature file and run the following command (by replacing `full_iso_name.iso` with the actual ISO filename):
+   ```shell
+   gpg --verify full_iso_name.iso.sig full_iso_name.iso
+   ```
+
+   If you get a **Good signature** output, the ISO file is genuine:
+   ```
+   gpg: Signature made Mo 01 Apr 2024 14:13:30 CEST
+   gpg:                using RSA key 882DCFE48E2051D48E2562ABF3B607488DB35A47
+   gpg: Good signature from "CachyOS <admin@cachyos.org>" [unknown]
+   gpg: WARNING: This key is not certified with a trusted signature!
+   gpg:          There is no indication that the signature belongs to the owner.
+   Primary key fingerprint: 882D CFE4 8E20 51D4 8E25  62AB F3B6 0748 8DB3 5A47
+   ```
+
+</Steps>
+
+:::danger
+If the output does not return **Good signature** string or the key ID does not match, don't use the ISO image and make sure that the downloaded image comes
+from a legitimate CachyOS source. A bad signature could suggest that the downloaded image has been tampered with.
+:::

@@ -1,0 +1,208 @@
+---
+title: FAQ
+description: Frequently asked questions and tips
+---
+
+import ImageComponent from '~/components/image-component.astro';
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::note
+The following questions & answers apply to CachyOS and Arch Based distributions.
+:::
+
+## Installation
+
+### Why is KDE Plasma the only available option in the live environment?
+
+KDE Plasma can be considered as our "flagship" desktop environment, therefore it gets the most maintenance. The other CachyOS's ISO
+were maintained in a half-ass state, so to avoid any unwanted issue & inconveniences for the user if at all, we decided to deprecate them so that we can focus our efforts to deliver
+the best user experience.
+
+We recommend installing CachyOS in a VM for testing out different desktop environments and window managers as the live ISO is only
+used for installation and recovering a broken install via [cachy-chroot](https://github.com/CachyOS/cachy-chroot).
+
+### When i press "Launch Installer" nothing seems to happen...?
+
+:::caution
+Make sure you have an active/running internet connection, otherwise nothing will happen after you press this button
+:::
+
+While it might seem like nothing happened, in the background there is a script which gets triggered after pressing this button. And what does it do? Well it's running a script for preparation that is  intended to avoid possible issues such as having an outdated keyring.
+
+I'll give you an small heads up on what this [script](https://github.com/CachyOS/CachyOS-Live-ISO/blob/master/archiso/airootfs/usr/local/bin/calamares-online.sh) is doing on the background:
+
+<Steps>
+
+1. Removes the existing keyring file found in `/etc/pacman.d/gnupg`.
+2. Starts installing and updating both `Arch Linux & CachyOS keyring packages`.
+3. Initiates and populates pacman keyring.
+4. Enables network time synchronization to ensure the system clock is accurate executing `timedatectl set-ntp true`.
+5. Determines and checks if the system type is either **UEFI or BIOS/MBR**
+6. If the running system is **UEFI** > prompt the user to select a bootloader, otherwise don't.
+
+</Steps>
+
+**This is why it usually takes a bit of time to load the installer.**
+
+### My installation process got stuck in 33% for a while now.
+
+This means that your internet connection is either very slow or unstable causing pacman to struggle when downloading the packages.
+
+## Software management
+
+### "unable to lock database" error
+```sh
+sudo rm /var/lib/pacman/db.lck
+```
+:::tip
+You can achieve the same outcome by using **"Remove db lock"** function in `CachyOS Hello` in the **Apps/Tweaks** tab.
+:::
+
+### File is corrupted (invalid or corrupted package (PGP signature))
+
+```text
+# Example:
+:: File /var/cache/pacman/pkg/python-charset-normalizer-3.4.0-1-any.pkg.tar.zst
+is corrupted (invalid or corrupted package (PGP signature)).
+```
+
+```sh title='Run the following commands'
+sudo rm -rf /etc/pacman.d/gnupg/
+sudo pacman-key --init
+sudo pacman-key --populate
+
+sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key F3B607488DB35A47
+
+sudo rm -R /var/lib/pacman/sync
+```
+
+### warning local is newer than
+
+#### Example:
+
+<br />
+<ImageComponent imgsrc={import('~/assets/images/update-warnings.png')} />
+
+```sh title='To remove these warnings, execute the following command:'
+sudo pacman -Syuu
+```
+
+### error: failed retrieving file, The requested URL returned error: 404
+
+```text
+# Example
+sudo pacman -S telegram-desktop
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (4) libdbusmenu-qt5-0.9.3+16.04.20160218-5  qt5-imageformats-5.15.2-1
+             ttf-opensans-1.101-2  telegram-desktop-2.5.1-1
+
+Total Download Size:   24.10 MiB
+Total Installed Size:  67.51 MiB
+
+:: Proceed with installation? [Y/n] Y
+:: Retrieving packages...
+error: failed retrieving file 'telegram-desktop-2.5.1-1-x86_64.pkg.tar.zst'
+from archlinux.mailtunnel.eu : The requested URL returned error: 404
+```
+
+*This means that your local database is outdated therefore the package you're asking for can't be downloaded.*
+
+```sh title='Run the following command to refresh the package database and do a full upgrade:'
+sudo pacman -Syu
+# Then try to install the package you want again.
+```
+
+### What does -bin means at the end of a package name? For example librewolf-bin
+
+This means that you're downloading/installing a prebuilt package therefore you don't need to compile or build it.
+In our repositories we store some bin packages which are basically mirrors that you can download from the AUR.
+
+### When I try to open Discord, a window opens notifying me of an update
+
+#### Example:
+
+<br />
+<ImageComponent imgsrc={import('~/assets/images/discord-update.png')} />
+
+This is because Discord released an update that is yet not available or it hasn't been built in any of the pacman mirrors, therefore you get stuck
+unable to use Discord.
+
+In order to get around this issue, follow [Arch Wiki's fix guide](<https://wiki.archlinux.org/title/Discord#Discord_asks_for_an_update_not_yet_available_in_the_repository>).
+
+
+### error: could not remove /var/cache/pacman/pkg/download
+
+:::tip
+You can also clean the pacman cache using CachyOS Hello in **Apps/Tweaks** > **Clear package cache**
+:::
+
+#### Example:
+
+<br />
+<ImageComponent imgsrc={import('~/assets/images/pacman-cache-error.png')} />
+
+*This usually appears when they're some orphans packages left in `/var/cache/pacman/pkg` which pacman can't delete.*
+
+```sh title='Run the following command to fix it'
+# Removes all the orphans stored in pkg cache.
+sudo rm -r /var/cache/pacman/pkg/*
+```
+
+### ERROR: module not found: 'nvidia', 'nvidia_modeset', 'nvidia_uvm', 'nvidia_drm'
+
+```sh title='Example'
+==> ERROR: module not found: 'nvidia'
+==> ERROR: module not found: 'nvidia_modeset'
+==> ERROR: module not found: 'nvidia_uvm'
+==> ERROR: module not found: 'nvidia_drm'
+```
+
+**Two reasons for this error:**
+
+**1) Since Early Module Loading is always enabled in chwd, mkinitcpio consistently expects the presence of NVIDIA modules therefore this error arises when these modules are missing.**
+
+**2) You might be missing NVIDIA modules from other installed kernels on your system.**
+
+```sh title='Install the following package to fix this error'
+sudo pacman -S nvidia
+```
+
+## Cachy Browser
+
+### Why this browser keeps deleting my saved credentials and cookies?
+
+- *This is because the browser comes with the option `Delete cookies and site data when Cachy Browser is closed` turned on by default.*
+  - **Follow the screenshot showing where to disable it:**
+    <br />
+    <ImageComponent imgsrc={import('~/assets/images/cachy-browser-cookies.png')} />
+
+### GitHub Homepage makes the browser unusable and extremely slow.
+
+- *Cachy Browser due to it's nature of leaning towards privacy. Disables WebGL by default and GitHub depends on it for rendering their homepage*
+  - **Re-enable it as shown in the screenshot**
+    <br />
+    <ImageComponent imgsrc={import('~/assets/images/cachy-browser-webgl.png')} />
+  - *After disabling this parameter. Restart your browser and try again.*
+*This recommendation also applies to websites that takes advantage of Hardware Acceleration via WebGL such as Photopea.*
+
+### Your browser is being managed by your organization. Do i need to worry?
+
+- *No. This is because we include a [policies file](https://github.com/CachyOS/CachyOS-Browser-Settings/blob/master/distribution/policies.json) on which we disable features and add modifications to the browser. Example: `additional search engines.`*
+
+### RFP (Resist Fingerprint Protection)
+
+- Cachy Browser enables `privacy.resistFingerprinting` by default. While it improves privacy, it comes at the cost of some issues for users that are not aware such as the following ones:
+  - Rendering artifacts
+  - Dark theme not applying
+  - Unable to login in certain websites (Twitch)
+  - Some keybind combinations do not work
+
+- To verify if this feature is the one causing the issue you are currently experiencing. Take a look to the following [Mozilla Article](https://support.mozilla.org/en-US/kb/resist-fingerprinting) and expand the **How might Resist Fingerprinting break web pages?** section.
+
+*In order to disable RFP, go to `about:config` and search for **privacy.resistFingerprinting** and set it to `false`*
+
+<br />
+    <ImageComponent imgsrc={import('~/assets/images/cachy-browser-resist-fingerprint.png')} />
