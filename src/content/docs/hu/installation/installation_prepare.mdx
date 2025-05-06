@@ -1,97 +1,96 @@
 ---
-title: Preparation steps
-description: How to prepare CachyOS for installation
+title: Előkészítési lépések
+description: A CachyOS előkészítése a telepítésre
 ---
 
 import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 import ImageComponent from '~/components/image-component.astro';
 
-## System Requirements
+## Rendszerkövetelmények
 
-Before beginning with installation preparations, make sure that the computer used meets the necessary system requirements in order to run CachyOS. The installer
-uses an online installation process so a stable and relatively fast internet connection is mandatory.
+A telepítési előkészületek megkezdése előtt győződjön meg arról, hogy a használt számítógép megfelel a CachyOS futtatásához szükséges rendszerkövetelményeknek. A telepítő online telepítési folyamatot használ, így stabil és viszonylag gyors internetkapcsolat szükséges.
 
 <Tabs>
 
-<TabItem label="Minimum requirements">
+<TabItem label="Minimum követelmények">
 
 *   3 GB RAM
-*   30 GB of Storage Space (HDD/SSD)
-*   Stable internet connection
+*   30 GB szabad hely (HDD/SSD)
+*   Stabil internetkapcsolat
 
-:::caution
-Unstable internet may cause prolonged period of installation or failed installs at worst
+:::figyelem
+Az instabil internetkapcsolat elhúzódó telepítési időt, vagy legrosszabb esetben sikertelen telepítést okozhat
 :::
 
 </TabItem>
 
-<TabItem label="Recommended requirements">
+<TabItem label="Ajánlott követelmények">
 
-*   8GB RAM
-*   50 GB of Storage Space (SSD/NVMe)
-*   [x86-64-v3 capable CPU](/installation/installation_prepare#x86_64-microarchitecture-level-support)
-*   50 Mbps or better internet speed
-*   NVIDIA GPU (900+ - e.g: GTX 950), AMD +GCN 1.0 (e.g: AMD R7 240) or Intel (Integrated HD Graphics series or higher. Arc Series)
+*   8 GB RAM
+*   50 GB szabad hely (SSD/NVMe)
+*   [x86-64-v3 kompatibilis CPU](/installation/installation_prepare#x86_64-microarchitecture-level-support)
+*   50 Mbps vagy jobb internetsebesség
+*   NVIDIA GPU (900+ - pl.: GTX 950), AMD +GCN 1.0 (pl.: AMD R7 240) vagy Intel (Integrated HD Graphics sorozat vagy újabb Arc sorozat)
 
 </TabItem>
 
 </Tabs>
 
-## x86_64 Microarchitecture Level Support
+## x86_64 Mikroarchitektúra szintű támogatás
 
 <Tabs>
 
-<TabItem label="x86_64-v3 Compatible CPUs">
+<TabItem label="x86_64-v3 kompatibilis CPU-k">
 
 - **Intel**
-  - Haswell and later generations **(e.g., Broadwell, Skylake, Coffee Lake, etc)**
+   - Haswell és későbbi generációk **(pl. Broadwell, Skylake, Coffee Lake, stb.)**
 - **AMD**
-  - **Ryzen Series**
+  - **Ryzen sorozat**
 
 </TabItem>
 
-<TabItem label="x86_64-v4 Compatible CPUs">
+<TabItem label="x86_64-v4 kompatibilis CPU-k">
 
 - **Intel**
-  - **Knights Landing (Xeon Phi x200), Knights Mill (Xeon Phi x205), Skylake-SP, Skylake-X, Cannon Lake, Cascade Lake, Cooper Lake, Ice Lake, Rocket Lake, Tiger Lake and Sapphire Rapids**
+  - **Knights Landing (Xeon Phi x200), Knights Mill (Xeon Phi x205), Skylake-SP, Skylake-X, Cannon Lake, Cascade Lake, Cooper Lake, Ice Lake, Rocket Lake, Tiger Lake és Sapphire Rapids**
 - **AMD**
-  - **Zen4+ CPUs**
+  - **Zen4+ CPU-k**
 
 </TabItem>
 
 </Tabs>
 
-## Creating a Bootable CachyOS USB Drive
+## Bootolható CachyOS USB-meghajtó létrehozása
 
-There are several tools and methods that can be used to create a bootable USB drive of CachyOS.
+Számos eszköz és módszer létezik a CachyOS indítható USB-meghajtójának létrehozásához.
 
 :::note
-The USB drive must have at least 8GB of available space.
+Az USB-meghajtónak legalább 8 GB szabad tárhellyel kell rendelkeznie.
 :::
 
 ### balenaEtcher
 
 <Steps>
 
-1. Download [balenaEtcher](<https://etcher.balena.io/>). balenaEtcher supports flashing an image of Linux, MacOS and Windows.
-   If a `.zip` file was downloaded, extract it and execute the binary using the following commands:
+1. Töltse le a [balenaEtcher](<https://etcher.balena.io/>)-t. A balenaEtcher támogatja a Linux, MacOS és Windows rendszerképek flashelését.
+   Ha egy `.zip` fájlt töltött le, csomagolja ki, és futtassa a bináris fájlt a következő parancsokkal:
       ```sh
-      # Extract zip file:
+      # Csomagolja ki a zip fájlt:
       bsdtar xvf <zip file name>
-      # cd to the new folder:
+      # Lépjen az új mappába:
       cd balenaEtcher-linux-x64/
-      # Execute balenaEtcher:
+      # Futtassa a balenaEtcher-t:
       ./balena-etcher
       ```
-2. Plug in a USB drive to the computer.
-3. Select **`Flash from file`** and select the CachyOS ISO image file.
-4. Click **`Select target`** and choose the USB drive that was previously plugged in.
-5. Press **`Flash`** to start the flashing process.
+2. Csatlakoztasson egy USB-meghajtót a számítógéphez.
+3. Válassza ki a **`Flash from file`** lehetőséget, és válassza ki a CachyOS ISO-képfájlt.
+4. Kattintson a **`Select target`** gombra, és válassza ki a korábban csatlakoztatott USB-meghajtót.
+5. Nyomja meg a **`Flash`** gombot a flashelési folyamat elindításához.
 
 </Steps>
 
 :::note
-balenaEtcher may prompt for administrator privileges. If so, enter your password and click on **`Authenticate`**.
+A balenaEtcher rendszergazdai jogosultságokat kérhet. Ebben az esetben adja meg jelszavát, és kattintson a **`Hitelesítés`** gombra.
 :::
 
 <br />
@@ -99,43 +98,43 @@ balenaEtcher may prompt for administrator privileges. If so, enter your password
 <ImageComponent imgsrc={import('~/assets/images/etcher.png')} />
 
 
-### Command Line Interface (Linux & MacOS)
+### Parancssoros felület (Linux és MacOS)
 
 <Steps>
 
-1. Plug in a USB drive.
-2. Detect the plugged USB drive using the following commands:
+1. Csatlakoztasson egy USB-meghajtót.
+2. A csatlakoztatott USB-meghajtó észleléséhez használja a következő parancsokat:
    ```sh
    # Linux
-   # The USB drive could be identified e.g: /dev/sda, by disk model and size.
+   # Az USB-meghajtó azonosítható pl.: /dev/sda, a lemez modellje és mérete alapján.
    sudo fdisk -l
 
    # MacOS
-   # USB drives are identified as "/dev/diskY" where "Y" could be 0,1 etc.
+   # Az USB-meghajtók "/dev/diskY" néven vannak azonosítva, ahol az "Y" lehet 0, 1 stb.
    diskutil list
    ```
-3. Copy the iso contents to the plugged USB drive by running:
+3. Másolja az ISO tartalmát a csatlakoztatott USB-meghajtóra a következő parancs futtatásával:
    ```sh
-   # Replace <usbdrive> with the label of the drive.
+   # Cserélje ki az <usbdrive> részt a meghajtó címkéjére.
    sudo dd bs=4M if=full_iso_name.iso of=/dev/<usbdrive> status=progress oflag=sync
    ```
 </Steps>
 
-- `dd` will now copy the contents of the ISO file over to the plugged USB drive.
+- A `dd` most átmásolja az ISO fájl tartalmát a csatlakoztatott USB-meghajtóra.
 
-### Rufus (Windows Only)
+### Rufus (Csak Windows)
 
 <Steps>
 
-1. Plug in USB drive.
-2. Download [Rufus](<https://rufus.ie/>) and install it, or run the portable version.
-3. On **`Device`**, click on the dropdown list and select the plugged USB drive.
-4. On **`Boot selection`**, click on **`SELECT`** and locate the CachyOS ISO image file.
-5. Click **`START`**.
+1. Csatlakoztasson egy USB-meghajtót.
+2. Töltse le a [Rufus](<https://rufus.ie/>)-t és telepítse, vagy futtassa a hordozható verziót.
+3. A **`Device`** alatt kattintson a legördülő listára, és válassza ki a csatlakoztatott USB-meghajtót.
+4. A **`Boot selection`** , alatt kattintson a **`SELECT`** gombra, és keresse meg a CachyOS ISO-képfájlt.
+5. Kattintson a **`START`** gombra.
 
 </Steps>
 
-### Ventoy (Linux & Windows)
+### Ventoy (Linux és Windows)
 
 <Tabs>
 
@@ -143,23 +142,23 @@ balenaEtcher may prompt for administrator privileges. If so, enter your password
 
 <Steps>
 
-1. Plug in a USB drive.
-2. Download [Ventoy](<https://www.ventoy.net/en/download.html>)
-3. Untar Ventoy using the following command:
+1. Csatlakoztasson egy USB-meghajtót.
+2. Töltse le a [Ventoy](<https://www.ventoy.net/en/download.html>)-t
+3. Csomagolja ki a Ventoy csomagot a következő paranccsal:
    ```sh
-   # Replace version with the correct one e.g: ventoy-1.0.99-linux.tar.gz
+   # Cserélje ki a verziót a megfelelőre, pl.: ventoy-1.0.99-linux.tar.gz
    bsdtar xvf ventoy-version-linux.tar.gz
-   # cd to the new folder: (version might change)
+   # cd paranccsal lépjen az új mappába: (a verzió változhat)
    cd ventoy-1.0.99/
    ```
-4. Execute **`VentoyGUI.x86_64`** by either double clicking on it or via the terminal:
+4. Futtassa a **`VentoyGUI.x86_64`** parancsot dupla kattintással vagy a parancssoron keresztül:
    ```sh
-   # It will ask for administrative privileges, enter your credentials
+   # Rendszergazdai jogosultságokat fog kérni, adja meg a hitelesítő adatait
    ./VentoyGUI.x86_64
    ```
-5. Select the plugged USB drive by clicking on **`Device`.**
-6. Click on **`Install`.**
-7. After it finished installing Ventoy into the plugged USB drive, close the window and place the CachyOS ISO file into the new usable partition of the drive.
+5. Válassza ki a csatlakoztatott USB-meghajtót a **`Device`** gombra kattintva.
+6. Kattintson az **`Install`** gombra.
+7. Miután befejezte a Ventoy telepítését a csatlakoztatott USB-meghajtóra, zárja be az ablakot, és helyezze a CachyOS ISO-fájlt a meghajtó új, használható partíciójába.
 
 </Steps>
 
@@ -168,12 +167,12 @@ balenaEtcher may prompt for administrator privileges. If so, enter your password
 <TabItem label="Windows">
 
 <Steps>
-1. Plug in a USB drive.
-2. Download [Ventoy](<https://www.ventoy.net/en/download.html>)
-3. Run **`Ventoy2Disk.exe`**
-4. Select the plugged USB drive by clicking on **`Device`.**
-5. Click on **`Install`.**
-6. After it finished installing Ventoy into the plugged USB drive, close the window and place the CachyOS ISO file into the new usable partition of the drive.
+1. Csatlakoztasson egy USB-meghajtót.
+2. Töltse le a [Ventoy](<https://www.ventoy.net/en/download.html>)-t
+3. Futtassa a **`Ventoy2Disk.exe`** fájlt
+4. Válassza ki a csatlakoztatott USB-meghajtót a **`Device`** gombra kattintva.
+5. Kattintson az **`Install`** gombra.
+6. Miután befejezte a Ventoy telepítését a csatlakoztatott USB-meghajtóra, zárja be az ablakot, és helyezze a CachyOS ISO-fájlt a meghajtó új, használható partíciójába.
 </Steps>
 
 </TabItem>

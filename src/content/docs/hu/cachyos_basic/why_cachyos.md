@@ -1,9 +1,9 @@
 ---
 title: Miért a CachyOS?
-description: Miért lenne jobb neked a CachyOS
+description: Miért lenne jobb önnek a CachyOS
 ---
 
-A CachyOS kifinomult Arch élményt kínál, felhasználóbarát telepítővel, előre beállított desktop környezetekkel és teljesítményoptimalizálással, anélkül, hogy a felhasználói élményt és a rendszer biztonságát gyengítené. Az alábbiakban bemutatjuk néhány kiemelkedő funkcióját, melyeket a CachyOS a lenyűgöző asztali élmény érdekében biztosít.
+A CachyOS (ejtsd: kesi-ó-essz) kifinomult Arch élményt kínál, felhasználóbarát telepítővel, előre beállított desktop környezetekkel és teljesítményoptimalizálással, anélkül, hogy a felhasználói élményt és a rendszer biztonságát gyengítené. Az alábbiakban bemutatjuk néhány kiemelkedő funkcióját, melyeket a CachyOS a lenyűgöző asztali élmény érdekében biztosít.
 
 ## Optimalizált csomagok és repository-k
 
@@ -14,7 +14,7 @@ A CachyOS által optimalizált különféle csomagokról bővebben az [Optimaliz
 ## Teljesítményre és stabilitásra hangolt egyedi Kernel
 
 A CachyOS alap kerneljavító készletén kívül, amely a kernel különböző paramétereit hangolja az asztal válaszidejének javítása érdekében, a CachyOS ígéretes javításkészleteket is kiválaszt, 
-amelyek nem szerepeltek a kernel stabil verziójában. Ezek a javítások belső tesztelésen esnek át, mielőtt a felhasználókhoz kerülnének,
+melyek nem szerepelnek a kernel stabil verziójában. Ezek a javítások belső tesztelésen esnek át, mielőtt a felhasználókhoz kerülnének,
 hogy biztosítsák stabilitásukat. A CachyOS által biztosított javítások teljes listáját lásd a [Kernel](/features/kernel) oldalon.
 
 ## Egyéni CPU-ütemező támogatása
@@ -55,7 +55,7 @@ gyakori problémára. A Package Installer segít a csomagok telepítésében.
 A CachyOS által fejlesztett és karbantartott alkalmazások listája:
 
 - **Cachy Browser**: Firefox-alapú böngésző, biztonságosabb konfigurációval és Gentoo-javításokkal + Teljesítményoptimalizálással.
-- **CachyOS Kernel Manager**: Könnyen telepíthet kerneleket a repository-ból, vagy konfigurálhatja saját kernelét, és beépítheti saját javításait, sőt, akár a sched-ext keretrendszert is kezelheti a [scx_loader](<https://github.com/sched-ext/scx/tree/main/rust/scx_loader>) segítségével.
+- **CachyOS Kernel Manager**: Könnyen telepíthet kerneleket a repository-ból, vagy konfigurálhatja saját kernelét, és beépítheti saját javításait, sőt, akár a sched-ext keretrendszert is kezelheti az [scx_loader](<https://github.com/sched-ext/scx/tree/main/rust/scx_loader>) segítségével.
 - **CachyOS Hello**: Alkalmazás a CachyOS-sel kapcsolatos módosítások vezérléséhez, javítások alkalmazásához, csomagok telepítéséhez és további információkhoz.
 - **CachyOS Package Installer**: Grafikus felhasználói felület a gyakran használt alkalmazások egyszerű telepítéséhez.
 - **cachyos-rate-mirrors**: Automatikusan rangsorolja az Arch és a CachyOS letöltési tükreit az optimális letöltési sebesség érdekében.
@@ -64,5 +64,5 @@ A CachyOS által fejlesztett és karbantartott alkalmazások listája:
 ## Barátságos és aktív közösség
 
 A legfontosabb tényező a CachyOS folyamatosan növekvő közössége. A közösségünk nélkül a CachyOS soha nem érhetett volna el oda, ahol most van.
-A közösség tagjai segítik egymást, és tippeket, trükköket osztanak meg egymással a jobb Linux-élmény érdekében. Csatlakozz a
+A közösség tagjai segítik egymást, tippeket és trükköket osztanak meg egymással a jobb Linux-élmény érdekében. Csatlakozzon a
 [CachyOS Discordon](https://discord.com/invite/cachyos-862292009423470592) vagy a [CachyOS fórumon](https://discuss.cachyos.org/).

@@ -29,14 +29,14 @@ Mindig tegyen egy plusz lépést az ISO integritásának ellenőrzésére, hogy 
 
 <Steps>
 
-1. Töltsd le a [fájlt](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256), amely tartalmazza a SHA256 hash-t **(Nyisd meg egy szövegszerkesztővel, pl.: Jegyzettömb).**
-2. Nyisd meg a parancssort vagy a PowerShellt rendszergazdaként, és [lépjen](<https://www.wikihow.com/Change-Directories-in-Command-Prompt>) abba a mappába, ahol az ISO és az SHA256 fájlok találhatók.
-3. Hajtsd végre a következő parancsot:
+1. Töltse le a SHA256 hash-t tartalmazó [fájlt](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) **(Nyissa meg egy szövegszerkesztővel, pl.: Jegyzettömb).**
+2. Nyissa meg a parancssort vagy a PowerShellt rendszergazdaként, és [lépjen](<https://www.wikihow.com/Change-Directories-in-Command-Prompt>) abba a könyvtárba, ahol az ISO és a SHA256 fájlok találhatók.
+3. Futtassa a következő parancsot:
    ```powershell
    # Példa:
    certUtil -hashfile cachyos-desktop-linux-250422.iso SHA256
    ```
-4. Hasonlítsd össze a certUtil hash kimenetét az **1. lépésben** letöltött fájl kimenetével. Ha egyeznek, folytathatod a CachyOS telepítését.
+4. Hasonlítsa össze a certUtil hash kimenetét az **1. lépésben** letöltött fájl ellenőrző összegével. Ha egyeznek, folytathatja a CachyOS telepítését.
 </Steps>
 
 </TabItem>
@@ -45,20 +45,20 @@ Mindig tegyen egy plusz lépést az ISO integritásának ellenőrzésére, hogy 
 
 <Steps>
 
-1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash.
-2. Open a terminal and navigate to the directory containing the `.sha256` file and execute the following commands:
+1. Töltse le a SHA256 hash-t tartalmazó [fájlt](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256)
+2. Nyisson meg egy terminált, lépjen be a `.sha256` fájlt tartalmazó könyvtárba, és futtassa a következő parancsokat:
    ```sh
-   # Example:
+   # Példa:
    cd Downloads/
    cat cachyos-desktop-linux-250422.iso.sha256
    # c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe
    ```
-3. Compare the output from **Step 2** and execute the following command to check what's the current hash in the ISO file.
+3. Hasonlítsa össze a **2. lépés** kimenetét, és futtassa a következő parancsot a jelenlévő ISO fájl hash-értékének ellenőrzéséhez.
    ```sh
-   # Example:
+   # Példa:
    sha256sum cachyos-desktop-linux-250422.iso
    ```
-4. If the hashes from **Step 2** and **Step 3** match, you can proceed with the CachyOS installation.
+4. Ha a **2. lépés** és a **3. lépés** ellenőrző összegei megegyeznek, folytathatja a CachyOS telepítését.
 
 </Steps>
 
@@ -68,20 +68,21 @@ Mindig tegyen egy plusz lépést az ISO integritásának ellenőrzésére, hogy 
 
 <Steps>
 
-1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash.
-2. Open a terminal and navigate to the directory containing the `.sha256` file and execute the following commands:
+1. Töltse le a SHA256 hash-t tartalmazó [fájlt](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256)
+2. Nyisson meg egy terminált, lépjen be a `.sha256` fájlt tartalmazó könyvtárba, és futtassa a következő parancsokat:
    ```sh
-   # Example:
+   # Példa:
    cd Downloads/
    cat cachyos-desktop-linux-250422.iso.sha256
    # c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe
    ```
-3. Compare the output from **Step 2** and execute the following command to check what's the current hash in the ISO file.
+3. Hasonlítsa össze a **2. lépés** kimenetét, és futtassa a következő parancsot a jelenlévő ISO fájl hash-értékének ellenőrzéséhez.
    ```sh
-   # Example:
+   # Példa:
    shasum -a 256 cachyos-desktop-linux-250422.iso
    ```
-4. If the hashes from **Step 2** and **Step 3** match, you can proceed with the CachyOS installation.
+4. Ha a **2. lépés** és a **3. lépés** ellenőrző összegei megegyeznek, folytathatja a CachyOS telepítését.
+
 
 </Steps>
 
@@ -89,24 +90,24 @@ Mindig tegyen egy plusz lépést az ISO integritásának ellenőrzésére, hogy 
 
 </Tabs>
 
-## Verify ISO Image Authenticity (Linux)
+## ISO-kép hitelességének ellenőrzése (Linux)
 
-To verify the authenticity of the ISO file to be sure that the actual one has been released by the official CachyOS development team:
+Az ISO-fájl hitelességének ellenőrzéséhez, hogy megbizonyosodjon arról, hogy a hivatalos CachyOS fejlesztőcsapat adta ki a jelenlévő fájlt:
 
 <Steps>
 
-1. Import the GPG key for verifying the authenticity:
+1. Importálja a GPG-kulcsot a hitelesség ellenőrzéséhez:
 
    ```shell
    gpg --keyserver hkps://keys.openpgp.org --recv-key F3B607488DB35A47
    ```
 
-2. Download the ISO file and its `.sig` signature file and run the following command (by replacing `full_iso_name.iso` with the actual ISO filename):
+2. Töltse le az ISO fájlt és a hozzá tartozó `.sig` signature fájlt, és futtassa a következő parancsot (a `full_iso_name.iso` helyére a jelenlévő ISO-fájlnév kerül):
    ```shell
    gpg --verify full_iso_name.iso.sig full_iso_name.iso
    ```
 
-   If you get a **Good signature** output, the ISO file is genuine:
+   Ha **Good signature** kimenetet kap, az ISO-fájl hiteles:
    ```
    gpg: Signature made Mo 01 Apr 2024 14:13:30 CEST
    gpg:                using RSA key 882DCFE48E2051D48E2562ABF3B607488DB35A47
@@ -118,7 +119,7 @@ To verify the authenticity of the ISO file to be sure that the actual one has be
 
 </Steps>
 
-:::danger
-If the output does not return **Good signature** string or the key ID does not match, don't use the ISO image and make sure that the downloaded image comes
-from a legitimate CachyOS source. A bad signature could suggest that the downloaded image has been tampered with.
+:::figyelem
+Ha a kimenet nem ad vissza **Good signature** karakterláncot, vagy a kulcsazonosító nem egyezik, ne használja az ISO-képet, és győződjön meg arról, hogy a letöltött kép
+hiteles CachyOS forrásból származik. Egy rossz signature arra utalhat, hogy a letöltött képet manipulálták.
 :::
