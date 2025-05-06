@@ -1,13 +1,13 @@
 ---
-title: Submitting Package Requests to CachyOS
-description: Package Requests for AUR Packages, ...
+title: Csomagkérelmek benyújtása a CachyOS-nek
+description: AUR csomagkérelmek, ...
 ---
 
-CachyOS offers an extensive list of precompiled AUR Packages, which are commonly used.
-Users can create requests for AUR packages, which, if approved, are automatically updated by our build server
+A CachyOS előre kompilált, gyakran használt AUR csomagok széles listáját kínálja.
+A felhasználók AUR csomagokra vonatkozó kérelmeket hozhatnak létre, amelyeket jóváhagyás esetén a build szerverünk automatikusan frissít.
 
-If you want us to add a package, you can submit a request on GitHub or in the forum.
+Ha szeretné, hogy hozzáadjunk egy csomagot, nyújtson be egy kérelmet a GitHubon vagy a fórumon.
 
 - GitHub: https://github.com/CachyOS/distribution/issues
-- Forum: https://discuss.cachyos.org/c/feedback/repository/11
-- Discord: [Feedback Channel](https://discord.com/channels/862292009423470592/1150723027986813018)
+- Fórum: https://discuss.cachyos.org/c/feedback/repository/11
+- Discord: [Feedback Csatorna](https://discord.com/channels/862292009423470592/1150723027986813018)

@@ -1,46 +1,46 @@
 ---
-title: Filesystems
-description: Description and recommendations for the available filesystems. (ext4, f2fs, btrfs, xfs, zfs, bcachefs)
+title: Fájlrendszerek
+description: Az elérhető fájlrendszerek leírása és ajánlásai (ext4, f2fs, btrfs, xfs, zfs, bcachefs)
 ---
 
-CachyOS offers 5 filesystems to allow the user to choose what best fits their needs. The following will go over advantages, disadvantages and recommendations for each filesystem. Each filesystem comes with its requirements/utilities preinstalled on CachyOS.
+A CachyOS 5 fájlrendszert kínál, hogy a felhasználó kiválaszthassa az igényeinek leginkább megfelelőt. Az alábbiakban az egyes fájlrendszerek előnyeit, hátrányait és ajánlásait ismertetjük. Minden fájlrendszerhez előre telepítve vannak a CachyOS-en a követelmények/segédprogramok.
 
-:::note
-BTRFS is the default and recommended filesystem for CachyOS. Choose it if unsure.
+:::note[Megjegyzés]
+A BTRFS a CachyOS alapértelmezett és ajánlott fájlrendszere. Ha bizonytalan, válassza ezt.
 :::
 
 ## XFS
-XFS is a journaling filesystem created and developed by Silicon Graphics, Inc. It was created in 1993, ported to linux in 2001, and is now widely supported by most Linux distributions.
-### Pros
-- Fast, XFS was originally designed with speed and extreme scalability in mind.
-- Reliable, XFS makes use of several technologies to prevent data corruption.
-- Resistant to fragmentation due to its extent-based nature and delayed allocation strategy.
-### Cons
-- Cannot be shrunk.
+Az XFS egy journaling fájlrendszer, amelyet a Silicon Graphics, Inc. készített és fejlesztett. 1993-ban hozták létre, 2001-ben portolták Linuxra, és ma már a legtöbb Linux disztribúció széles körben támogatja.
+### Előnyök
+- Gyors, az XFS-t eredetileg a sebesség és a rendkívüli skálázhatóság szem előtt tartásával tervezték.
+- Megbízható, az XFS számos technológiát használ az adatvesztés megakadályozására.
+- Ellenáll a töredezésnek a kiterjedésalapú jellege és a késleltetett allokációs stratégiája miatt.
+### Hátrányok
+- Nem lehet zsugorítani.
 
-### Userspace utility
-The package containing userspace tools to manage XFS filesystems is `xfsprogs`.
+### Felhasználói tér segédprogram
+Az XFS fájlrendszerek kezelésére szolgáló felhasználói térbeli eszközöket tartalmazó csomag az `xfsprogs`.
 
-### Recommendation:
-XFS is the recommended filesystem for users who do not need advanced features and simply want a fast and reliable filesystem.
+### Ajánlás:
+Az XFS az ajánlott fájlrendszer azoknak a felhasználóknak, akiknek nincs szükségük haladó funkciókra, és egyszerűen csak egy gyors és megbízható fájlrendszert szeretnének.
 
 
 ## BTRFS
-BTRFS is a modern copy-on-write(COW) filesystem created in 2007 and declared stable in the linux kernel in 2013. It is widely supported and is mainly known for its advanced feature set.
-### Pros
-- Transparent compression. BTRFS supports transparently compressing files to allow for significant space savings with no user intervention. CachyOS ships with ZSTD compression set to level 3 by default.
-- Snapshot functionality. BTRFS leverages its COW nature to allow for the creation of snapshots of subvolumes that take up very little actual space.
-- Subvolume functionality allowing for greater control over the filesystem.
-- Able to grow or shrink.
-- Very fast development.
-### Cons
-- Sometimes requires defragmentation or balancing.
-- Worse on rotational drives due to aforementioned fragmentation.
-### Userspace utility
-Btrfs userspace utility package is `btrfs-progs`
+A BTRFS egy modern, 2007-ben létrehozott, copy-on-write (másolás-írás) (COW) fájlrendszer, amelyet 2013-ban stabilnak nyilvánítottak a Linux kernelben. Széles körben támogatott, és főként fejlett funkciókészletéről ismert.
+### Előnyök
+- Átlátszó tömörítés. A BTRFS támogatja a fájlok átlátszó tömörítését, így jelentős helymegtakarítást érhet el felhasználói beavatkozás nélkül. A CachyOS alapértelmezés szerint 3-as ZSTD tömörítési szintet használ.
+- Snapshot funkció. A BTRFS a COW természetét kihasználva lehetővé teszi olyan alkötetek (subvolumeok) pillanatképeinek készítését, amelyek nagyon kevés helyet foglalnak el.
+- Alkötet (subvolume) funkcionalitás, amely lehetővé teszi a fájlrendszer nagyobb irányítását.
+- Képes kiterjedni vagy zsugorodni.
+- Nagyon gyors fejlesztés.
+### Hátrányok
+- Néha töredezettségmentesítést vagy kiegyensúlyozást igényel.
+- Forgó meghajtókon rosszabb a fent említett töredezettség miatt.
+### Felhasználói tér segédprogram
+A Btrfs felhasználói tér segédprogramcsomagja a `btrfs-progs`.
 
-### Subvolume Layout
-CachyOS provides a subvolume layout out of the box to allow easy snapshot functionality.
+### Alkötet (subvolume) elrendezés
+A CachyOS alapértelmezés szerint egy alkötet elrendezést biztosít az egyszerű pillanatkép-készítési funkciókhoz.
 - Subvol @ = /
 - Subvol @home = /home
 - Subvol @root = /root
@@ -49,92 +49,90 @@ CachyOS provides a subvolume layout out of the box to allow easy snapshot functi
 - Subvol @tmp = /var/tmp
 - Subvol @log = /var/log
 
-### Recommendation:
-BTRFS is recommended for users who want snapshot/backup functionality and transparent compression.
+### Ajánlás:
+A BTRFS-t azoknak a felhasználóknak ajánljuk, akik snapshot/mentés funkciót és transzparens tömörítést szeretnének.
 
 
 ## EXT4
-EXT4 (fourth extended filesystem) is the most commonly used Linux filesystem. EXT4 was made stable in the linux kernel in 2008.
-### Pros
-- Very common allowing easy access to plenty of resources.
-- Reliable. EXT4 has a proven track record of being very reliable.
-- Able to grow or shrink.
-### Cons
-- Built on an old code base.
-- Lacks many of the advanced features other filesystems offer.
+Az EXT4 (fourth extended filesystem) a leggyakrabban használt Linux fájlrendszer. Az EXT4-et 2008-ban tették stabillá a Linux kernelben.
+### Előnyök
+- Nagyon elterjedt, könnyű hozzáférést biztosít számos erőforráshoz.
+- Megbízható. Az EXT4 bizonyítottan nagyon megbízható.
+- Képes kiterjedni vagy zsugorodni.
+### Hátrányok
+- Régi kódalapra épül.
+- Hiányzik belőle sok olyan fejlett funkció, amit más fájlrendszerek kínálnak.
 
-### Userspace utilities
-The package to manage ext4 is `e2fsprogs`
+### Felhasználói tér segédprogram
+Az ext4 kezelésére szolgáló csomag az `e2fsprogs`.
 
-### Recommendation:
-EXT4 is recommended for users who want the simplest and most commonly used filesystem.
-
+### Ajánlás:
+Az EXT4 azoknak a felhasználóknak ajánlott, akik a legegyszerűbb és leggyakrabban használt fájlrendszert szeretnék.
 
 ## ZFS
 
-ZFS is an advanced filesystem originally developed by Sun Microsystems in 2005. ZFS has many features however it licensed under CDDL which means it can not be included inside the linux kernel and requires a separate module installed.
+A ZFS egy fejlett fájlrendszer, amelyet eredetileg a Sun Microsystems fejlesztett ki 2005-ben. A ZFS számos funkcióval rendelkezik, azonban CDDL licenc alatt van, ami azt jelenti, hogy nem integrálható a Linux kernelbe, és külön modul telepítését igényli.
 
-:::caution
-Do not use a Real-time kernel together with ZFS because its not compatible due to licensing issues.
+:::caution[Figyelem]
+Ne használj valós idejű kernelt ZFS-sel együtt, mert licencelési problémák miatt nem kompatibilisek.
 :::
 
-### Pros
+### Előnyök
 - Pooled storage (zpool)
-- Snapshots using COW
-- Compression
-- Raid-Z support
-- ARC cache allows insanely fast read times on commonly accessed files.
-### Cons
-- Very complicated to use and understand due to features like zpool and ARC.
-- ARC requires a lot of ram to be effective.
-- Not included in the linux kernel therefore dependent on a third party kernel module (OpenZFS)
-- Incompatible with Real-time preemption
+- Pillanatképek COW használatával
+- Tömörítés
+- Raid-Z támogatás
+- Az ARC gyorsítótár hihetetlenül gyors olvasási időt biztosít a gyakran használt fájlokon.
+### Hátrányok
+- Nagyon bonyolult a használata és megértése olyan funkciók miatt, mint a zpool és az ARC.
+- Az ARC sok RAM-ot igényel a hatékony működéshez.
+- Nem része a Linux kernelnek, ezért egy harmadik féltől származó kernel modultól (OpenZFS) függ.
+- Nem kompatibilis a valós idejű preempcióval.
 
-### Required tools
-'ZFS-Module' CachyOS provides a precompiled zfs module for each kernel version.
-`zfs-utils` for the userspace utilities.
+### Szükséges eszközök
+'ZFS-Module' A CachyOS minden kernel verzióhoz előre kompilált zfs modult biztosít.
+A felhasználói térben található segédprogramokhoz a `zfs-utils` modult használjuk.
 
-### Recommendation:
-ZFS should only be used by advanced users who want the advanced features of ZFS such as pooled storage or the ARC cache.
+### Ajánlás:
+A ZFS-t csak haladó felhasználók képesek használni, akik a ZFS speciális funkcióit, például a közös tárhelyet vagy az ARC gyorsítótárat szeretnék használni.
 
 
 ## F2FS
-F2FS or the Flash-Friendly File System, is a flash file system created and developed by Samsung originally for the linux kernel. F2FS was created to cater specifically for the NAND flash used in modern day storage.
-### Pros
-- Designed with flash friendliness in mind.
-- Transparent compression used to reduce disk writes (Space savings not currently usable by user)
-- Faster than other filesystems like EXT4.
-- Better wear leveling further prolonging the life of NAND flash.
-### Cons
-- Cannot shrink.
-- Space savings from compression cannot currently be used by the user. This may be added in the future.
-- Relatively weak fsck. (filesystem check)
-- Downgrading to a kernel older than the version that created the filesystem may cause issues.
+Az F2FS, vagyis a Flash-Friendly File System egy flash fájlrendszer, amelyet a Samsung eredetileg a Linux kernelhez készített és fejlesztett ki. Az F2FS-t kifejezetten a modern tárolókban használt NAND flash memóriák kiszolgálására hozták létre.
+### Előnyök
+- Flash-barát kialakítással tervezve.
+- Átlátszó tömörítés a lemezírások számának csökkentésére (a felhasználó jelenleg nem használhatja fel a helymegtakarítást).
+- Gyorsabb, mint más fájlrendszerek, például az EXT4.
+- Jobb kopáskiegyenlítés, ami tovább növeli a NAND flash élettartamát.
+### Hátrányok
+- Nem zsugorítható.
+- A tömörítésből származó helymegtakarítást a felhasználó jelenleg nem használhatja fel. Ez a jövőben lehet hozzá lesz adva.
+- Viszonylag gyenge fsck. (fájlrendszer-ellenőrzés)
+- A fájlrendszert létrehozó verziónál régebbi kernelre való visszalépés problémákat okozhat.
 
-### Userspace utilities
-The main utility for f2fs is `f2fs-tools`
+### Felhasználói tér segédprogram
+Az f2fs fő segédprogramja az `f2fs-tools`.
 
-### Recommendation:
-F2FS is only recommended for users who want to maximize the life of their NAND flash.
+### Ajánlás:
+Az F2FS csak azoknak a felhasználóknak ajánlott, akik maximalizálni szeretnék NAND flash memóriájuk élettartamát.
 
 ## BcacheFS
-Bcachefs is an advanced new filesystem for Linux, with an emphasis on reliability and robustness and the complete set of features one would expect from a modern filesystem.
+A Bcachefs egy fejlett új fájlrendszer Linuxra, amely a megbízhatóságra és a robusztusságra helyezi a hangsúlyt, és a modern fájlrendszerektől elvárható funkciók teljes skáláját kínálja.
 
-:::caution[ATTENTION]
-Bcachefs is still considered as experimental and can have issues.
+:::caution[FIGYELEM]
+A Bcachefs még kísérleti jellegűnek számít, és problémákat okozhat.
 :::
 
-### Pros
-- Copy on write (CoW) - like BTRFS or ZFS
-- Compression
-- Caching, Data Placement
-- Replication
-- Scalable
-### Cons
-- Experimental
-- Setup can be complicated
+### Előnyök
+- Copy on write (CoW) - mint a BTRFS vagy a ZFS
+- Tömörítés
+- Gyorsítótárazás, adatelhelyezés
+- Replikáció
+- Skálázható
+### Hátrányok
+- Kísérleti
+- A beállítás bonyolult lehet
 
-## TL:DR
-Use the default filesystem **BTRFS** as it is considered stable and has a lot of neat features (snapshots, compression, etc). Use **XFS** or **EXT4** for a simple
-and fast filesystem.
+## Röviden összefoglalva
+Használja az alapértelmezett **BTRFS** fájlrendszert, mivel stabilnak tekinthető, és sok hasznos funkcióval rendelkezik (pillanatképek, tömörítés stb.). Használjon **XFS** vagy **EXT4** formátumot egy egyszerű és gyors fájlrendszerhez.
 

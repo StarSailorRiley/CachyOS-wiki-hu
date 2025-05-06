@@ -1,42 +1,42 @@
 ---
-title: Desktop Environments
-description: Desktop Environments supported by CachyOS
+title: Desktop környezetek
+description: A CachyOS által támogatott desktop környezetek
 ---
 
-*CachyOS offers several desktop environments for you to choose from.*
+*A CachyOS számos desktop környezetet kínál, amelyek közül választhat.*
 
-**Remember. This is a decision that one should make therefore pick the one you like the most.**
-:::note
-Please select only one Desktop Environment during the installation.
+**Ne feledje. Ez egy olyan döntés, amit mindenkinek meg kell hoznia, ezért válassza azt, amelyik a legjobban tetszik.**
+:::note[Megjegyzés]
+A telepítés során csak egy desktop környezetet válasszon.
 :::
 
-The available options are:
+Az elérhető lehetőségek a következők:
 
-1. **KDE Plasma:** is a comprehensive and flexible desktop environment that offers multiple styles of menus to access applications. It features the KWin window manager. KDE Plasma also boasts an intuitive interface that allows you to easily download and install new themes, widgets, and more from the web.
-2. **GNOME:** is a user-friendly desktop environment with a touch-style interface for accessing applications. While it is easy to learn, it may have limited customization options and can be difficult to configure.
-3. **XFCE:** is a lightweight and flexible desktop environment with a traditional drop-down/pop-up menu for accessing applications, and is compatible with Compiz.
-4. **bspwm:**  is a C-based X11 window manager offering flexible tiling,stacking, and tabbing layouts.
-5. **Budgie:** is a simple and elegant desktop environment built using the GTK toolkit. It is designed to provide a modern and attractive interface that is easy to use, while also being highly configurable.
-6. **Cinnamon:** is a desktop environment for Linux that balances advanced features with a traditional user experience.
-7. **Cosmic:** **`Currently in alpha.`** is a modern, performance-oriented desktop environment built with Rust and Smithay. Designed for productivity and power users, it aims to offer advanced features while maintaining a clean but intuitive interface.
-8. **i3:** is a popular X11 tiling window manager known for its single, self-contained configuration file and its efficient use of screen space. Find our i3 [dotfiles](https://github.com/CachyOS/cachyos-i3wm-settings).
-9. **Hyprland:** is a visually pleasing Wayland compositor that uses dynamic tiling. It comes with pre-configured [dotfiles](https://github.com/CachyOS/cachyos-hyprland-settings). **`Unstable on certain hardware configurations`**.
-10. **LXDE:** (Lightweight X11 Desktop Environment) is a fast and energy-saving desktop environment designed to be used on older computers and resource-constrained systems. It uses Openbox as its default window manager and focuses on providing a simple, clean and user-friendly interface.
-11. **LXQt:** is a lightweight desktop environment formed from the merger of the LXDE and Razor-qt projects and built with Qt.
-12. **Mate Desktop:** is a traditional desktop environment forked from GNOME 2. It is characterized by its classic look and feel, with a simple and intuitive user interface. Mate provides an easy-to-use and highly customizable desktop experience for users who prefer a more classic look and feel.
-13. **Openbox:** is a highly popular X11 window manager known for its excellent documentation and a wide selection of available themes.
-14. **Qtile:** is a X11/Wayland window manager that is configured with the Python programming language. offering various layouts and widgets. Find our [dotfiles](https://github.com/CachyOS/cachyos-qtile-settings).
-15. **Sway:** is a tiling Wayland compositor and a drop-in replacement for the i3 window manager for X11. It works with your existing i3 configuration and supports most of i3's features plus a few extras.
-16. **UKUI:** is a lightweight desktop environment that is efficient and works well on older computers. It uses both GTK and Qt technologies, and has a visual appearance similar to Windows 7, making it user-friendly for new Linux users.
-17. **Wayfire:** is a Wayland compositor based on wlroots that balances customization, extensibility, and aesthetics. Find our Wayfire [dotfiles](https://github.com/CachyOS/cachyos-wayfire-settings).
+1. A **KDE Plasma:** egy átfogó és rugalmas desktop környezet, amely többféle menüstílust kínál az alkalmazások eléréséhez. Tartalmazza a KWin ablakkezelőt. A KDE Plasma intuitív felülettel is büszkélkedhet, amely lehetővé teszi új témák, widgetek és egyebek egyszerű letöltését és telepítését az internetről.
+2. A **GNOME:** egy felhasználóbarát desktop környezet érintőképernyő stílusú felülettel az alkalmazások eléréséhez. Bár könnyen megtanulható, korlátozott testreszabási lehetőségekkel rendelkezhet, és nehézkes lehet a konfigurálása.
+3. A **XFCE:** egy könnyű és rugalmas desktop környezet hagyományos legördülő/felugró menüvel az alkalmazások eléréséhez, és kompatibilis a Compiz-szal.
+4. A **bspwm:** egy C alapú X11 ablakkezelő, amely rugalmas mozaik-, halmozási és tabulátoros elrendezést kínál.
+5. A **Budgie:** egy egyszerű és elegáns desktop környezet, amely a GTK eszközkészlettel készült. Úgy tervezték, hogy modern és vonzó felületet biztosítson, amely könnyen használható, ugyanakkor rendkívül jól konfigurálható.
+6. A **Cinnamon:** egy Linux desktop környezet, amely a fejlett funkciókat a hagyományos felhasználói élménnyel ötvözi.
+7. A **Cosmic:** **`Jelenleg alfában.`** egy modern, teljesítményorientált desktop környezet, amely Rust és Smithay segítségével készült. A produktivitás és a haladó felhasználók számára tervezett, fejlett funkciókat kínál, miközben letisztult, mégis intuitív felületet biztosít.
+8. Az **i3:** egy népszerű X11-es mozaikszerű ablakkezelő, amely egyetlen, önálló konfigurációs fájljáról és a képernyőterület hatékony kihasználásáról ismert. Tekintse meg i3 [dotfájljainkat](https://github.com/CachyOS/cachyos-i3wm-settings).
+9. A **Hyprland:** egy kinézetre kellemes Wayland kompozitáló, amely dinamikus csempézést használ. Előre konfigurált [dotfájlokkal] érkezik (https://github.com/CachyOS/cachyos-hyprland-settings). **`Bizonyos hardverkonfigurációk esetén instabil`**.
+10. Az **LXDE:** (Lightweight X11 Desktop Environment) egy gyors és energiatakarékos desktop környezet, amelyet régebbi számítógépeken és erőforrás-korlátos rendszereken való használatra terveztek. Az Openboxot használja alapértelmezett ablakkezelőként, és az egyszerű, letisztult és felhasználóbarát felület biztosítására összpontosít.
+11. Az **LXQt:** egy pehelysúlyú desktop környezet, amely az LXDE és a Razor-qt projektek egyesüléséből jött létre, és Qt-vel készült.
+12. A **Mate Desktop:** egy hagyományos desktop környezet, amely a GNOME 2-ből származik. Klasszikus megjelenése és érzete, egyszerű és intuitív felhasználói felülettel jellemzi. A Mate könnyen használható és nagymértékben testreszabható asztali élményt nyújt azoknak a felhasználóknak, akik a klasszikusabb megjelenést és érzetet kedvelik.
+13. Az **Openbox:** egy rendkívül népszerű X11 ablakkezelő, amely kiváló dokumentációjáról és a rendelkezésre álló témák széles választékáról ismert.
+14. A **Qtile:** egy X11/Wayland ablakkezelő, amely Python programozási nyelven van konfigurálva. Különböző elrendezéseket és widgeteket kínál. Keresse a [dotfájljainkat](https://github.com/CachyOS/cachyos-qtile-settings).
+15. A **Sway:** egy Wayland csempéző, és az i3 ablakkezelő X11-es verziójának drop-in helyettesítője. Működik a meglévő i3 konfigurációjával, és támogatja az i3 legtöbb funkcióját, valamint néhány extrát.
+16. A **UKUI:** egy könnyű desktop környezet, amely hatékony és jól működik régebbi számítógépeken. GTK és Qt technológiákat is használ, és vizuális megjelenése hasonló a Windows 7-hez, így felhasználóbarát az új Linux-felhasználók számára.
+17. A **Wayfire:** egy wlroots-alapú Wayland kompozitor, amely egyensúlyt teremt a testreszabhatóság, a bővíthetőség és az esztétika között. Keresse a Wayfire [dotfájljainkat](https://github.com/CachyOS/cachyos-wayfire-settings).
 
-:::note
-Due to the nature of Hyprland including breaking changes and instability, we decided to only maintain our dotfiles but don't expect help outside our config.
+:::note[Megjegyzés]
+A Hyprland természetéből adódóan, beleértve a hibás változtatásokat és az instabilitást, úgy döntöttünk, hogy csak a dotfájljainkat tartjuk karban, de ne számítson segítségre a konfigurációnkon kívül.
 
-Therefore try asking help in our Discord instead and wait for an answer from the community.
+Ezúttal próbáljon meg segítséget kérni a Discordon, és várjon a közösség válaszára.
 :::
 
-[Screenshots](/installation/screenshots)
+[Képernyőképek](/installation/screenshots)
 -----------
 
-*Section for images showcasing our theming and designs to the provided desktop environments and window managers.*
+*Ez a rész a képeknek ad otthont, amelyek bemutatják a témáinkat és a dizájnjainkat a biztosított desktop környezetekben és ablakkezelőkben.*

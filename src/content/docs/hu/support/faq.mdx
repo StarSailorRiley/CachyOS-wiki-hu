@@ -1,72 +1,69 @@
 ---
-title: FAQ
-description: Frequently asked questions and tips
+title: Gyakran Ismételt Kérdések
+description: Gyakran Ismételt Kérdések
 ---
 
 import ImageComponent from '~/components/image-component.astro';
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-:::note
-The following questions & answers apply to CachyOS and Arch Based distributions.
+:::note[Megjegyzés]
+A következő kérdések és válaszok CachyOS és Arch alapú disztribúciókra vonatkoznak.
 :::
 
-## Installation
+## Telepítés
 
-### Why is KDE Plasma the only available option in the live environment?
+### Miért csak a KDE Plasma elérhető a live környezetben?
 
-KDE Plasma can be considered as our "flagship" desktop environment, therefore it gets the most maintenance. The other CachyOS's ISO
-were maintained in a half-ass state, so to avoid any unwanted issue & inconveniences for the user if at all, we decided to deprecate them so that we can focus our efforts to deliver
-the best user experience.
+A KDE Plasma tekinthető a „zászlóshajó” desktop környezetünknek, ezért ez kapja a legtöbb karbantartást. A többi CachyOS ISO-ját félkész állapotban tartottuk karban, ezért a felhasználók számára esetlegesen felmerülő nem kívánt problémák és kellemetlenségek elkerülése érdekében úgy döntöttünk, hogy elavuljuk őket, hogy erőfeszítéseinket a legjobb felhasználói élmény biztosítására összpontosíthassuk.
 
-We recommend installing CachyOS in a VM for testing out different desktop environments and window managers as the live ISO is only
-used for installation and recovering a broken install via [cachy-chroot](https://github.com/CachyOS/cachy-chroot).
+A CachyOS virtuális gépre telepítését javasoljuk a különböző desktop környezetek és ablakkezelők kipróbálásához, mivel a live ISO-t csak a telepítéshez és a hibás telepítés helyreállításához használjuk a [cachy-chroot](https://github.com/CachyOS/cachy-chroot) segítségével.
 
-### When i press "Launch Installer" nothing seems to happen...?
+### Amikor megnyomom a "Telepítő indítása" gombot, semmi sem történik...?
 
-:::caution
-Make sure you have an active/running internet connection, otherwise nothing will happen after you press this button
+:::caution[Figyelem]
+Győződjön meg róla, hogy aktív/működő internetkapcsolattal rendelkezik, különben semmi sem fog történni a gomb megnyomása után
 :::
 
-While it might seem like nothing happened, in the background there is a script which gets triggered after pressing this button. And what does it do? Well it's running a script for preparation that is  intended to avoid possible issues such as having an outdated keyring.
+Bár úgy tűnhet, mintha semmi sem történt volna, a háttérben egy szkript fut, amely a gomb megnyomása után elindul. És mit csinál? Nos, egy előkészítési szkriptet futtat, amelynek célja, hogy elkerülje az olyan lehetséges problémákat, mint például egy elavult keyring.
 
-I'll give you an small heads up on what this [script](https://github.com/CachyOS/CachyOS-Live-ISO/blob/master/archiso/airootfs/usr/local/bin/calamares-online.sh) is doing on the background:
+Adok egy rövid tájékoztatást arról, hogy mit csinál ez a [szkript](https://github.com/CachyOS/CachyOS-Live-ISO/blob/master/archiso/airootfs/usr/local/bin/calamares-online.sh) a háttérben:
 
 <Steps>
 
-1. Removes the existing keyring file found in `/etc/pacman.d/gnupg`.
-2. Starts installing and updating both `Arch Linux & CachyOS keyring packages`.
-3. Initiates and populates pacman keyring.
-4. Enables network time synchronization to ensure the system clock is accurate executing `timedatectl set-ntp true`.
-5. Determines and checks if the system type is either **UEFI or BIOS/MBR**
-6. If the running system is **UEFI** > prompt the user to select a bootloader, otherwise don't.
+1. Eltávolítja a meglévő `/etc/pacman.d/gnupg`-ban található keyring fájlt.
+2. Elindítja az `Arch Linux & CachyOS keyring csomagok` telepítését és frissítését.
+3. Elindítja és feltölti a pacman keyring-et.
+4. Engedélyezi a hálózati idő szinkronizálását a rendszeróra pontosságának biztosítása érdekében a `timedatectl set-ntp true` parancs futtatásával.
+5. Meghatározza és ellenőrzi, hogy a rendszer típusa **UEFI vagy BIOS/MBR**.
+6. Ha a futó rendszer **UEFI** > a felhasználót felszólítja a rendszerbetöltő kiválasztására, egyébként nem.
 
 </Steps>
 
-**This is why it usually takes a bit of time to load the installer.**
+**Ezért általában eltart egy ideig a telepítő betöltése.**
 
-### My installation process got stuck in 33% for a while now.
+### A telepítési folyamatom egy ideje 33%-on elakadt.
 
-This means that your internet connection is either very slow or unstable causing pacman to struggle when downloading the packages.
+Ez azt jelenti, hogy az internetkapcsolatod vagy nagyon lassú, vagy instabil, ami miatt a pacmannek nehézségei vannak a csomagok letöltésével.
 
-## Software management
+## Szoftverkezelés
 
-### "unable to lock database" error
+### "unable to lock database" hiba
 ```sh
 sudo rm /var/lib/pacman/db.lck
 ```
-:::tip
-You can achieve the same outcome by using **"Remove db lock"** function in `CachyOS Hello` in the **Apps/Tweaks** tab.
+:::tip[Tipp]
+Ugyanezt az eredményt érheted el a `CachyOS Hello` **Alkalmazások/Javítások** lapján található **"Remove data lock"** függvény használatával.
 :::
 
 ### File is corrupted (invalid or corrupted package (PGP signature))
 
 ```text
-# Example:
+# Példa:
 :: File /var/cache/pacman/pkg/python-charset-normalizer-3.4.0-1-any.pkg.tar.zst
 is corrupted (invalid or corrupted package (PGP signature)).
 ```
 
-```sh title='Run the following commands'
+```sh title='Futtassa a következő parancsokat'
 sudo rm -rf /etc/pacman.d/gnupg/
 sudo pacman-key --init
 sudo pacman-key --populate
@@ -79,19 +76,19 @@ sudo rm -R /var/lib/pacman/sync
 
 ### warning local is newer than
 
-#### Example:
+#### Példa:
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/update-warnings.png')} />
 
-```sh title='To remove these warnings, execute the following command:'
+```sh title='A figyelmeztetések eltávolításához futtassa a következő parancsot:'
 sudo pacman -Syuu
 ```
 
 ### error: failed retrieving file, The requested URL returned error: 404
 
 ```text
-# Example
+# Példa
 sudo pacman -S telegram-desktop
 resolving dependencies...
 looking for conflicting packages...
@@ -108,101 +105,100 @@ error: failed retrieving file 'telegram-desktop-2.5.1-1-x86_64.pkg.tar.zst'
 from archlinux.mailtunnel.eu : The requested URL returned error: 404
 ```
 
-*This means that your local database is outdated therefore the package you're asking for can't be downloaded.*
+*Ez azt jelenti, hogy a helyi adatbázis elavult, ezért a kért csomag nem tölthető le.*
 
-```sh title='Run the following command to refresh the package database and do a full upgrade:'
+```sh title='A csomagadatbázis frissítéséhez és a teljes frissítés végrehajtásához futtassa a következő parancsot:'
 sudo pacman -Syu
-# Then try to install the package you want again.
+# Ezután próbálja meg újra telepíteni a kívánt csomagot.
 ```
 
-### What does -bin means at the end of a package name? For example librewolf-bin
+### Mit jelent a csomagnév végén található -bin? Például librewolf-bin
 
-This means that you're downloading/installing a prebuilt package therefore you don't need to compile or build it.
-In our repositories we store some bin packages which are basically mirrors that you can download from the AUR.
+Ez azt jelenti, hogy egy előre elkészített csomagot töltesz le/telepítesz, ezért nem kell kompilálnod vagy felépítened.
+A tárolóinkban néhány bin csomagot tárolunk, amelyek alapvetően tükrözések, amelyeket letölthetsz az AUR-ból.
 
-### When I try to open Discord, a window opens notifying me of an update
+### Amikor megpróbálom megnyitni a Discordot, egy ablak nyílik meg, amely értesít egy frissítésről
 
-#### Example:
+#### Példa:
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/discord-update.png')} />
 
-This is because Discord released an update that is yet not available or it hasn't been built in any of the pacman mirrors, therefore you get stuck
-unable to use Discord.
+Ez azért van, mert a Discord kiadott egy frissítést, ami még nem érhető el, vagy még egyik Pacman tükörben sem lett beépítve, ezért elakadhat a Discord használatában.
 
-In order to get around this issue, follow [Arch Wiki's fix guide](<https://wiki.archlinux.org/title/Discord#Discord_asks_for_an_update_not_yet_available_in_the_repository>).
+A probléma megkerüléséhez kövesse az [Arch Wiki javítási útmutatóját](<https://wiki.archlinux.org/title/Discord#Discord_asks_for_an_update_not_yet_available_in_the_repository>).
 
 
 ### error: could not remove /var/cache/pacman/pkg/download
 
-:::tip
-You can also clean the pacman cache using CachyOS Hello in **Apps/Tweaks** > **Clear package cache**
+:::tip[Tipp]
+A pacman gyorsítótárát a CachyOS Hello segítségével is kiürítheted az **Alkalmazások/Tweaks** > **Csomag gyorsítótárának törlése** menüpontban.
 :::
 
-#### Example:
+#### Példa:
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/pacman-cache-error.png')} />
 
-*This usually appears when they're some orphans packages left in `/var/cache/pacman/pkg` which pacman can't delete.*
+*Ez általában akkor jelenik meg, ha néhány árva csomag maradt a `/var/cache/pacman/pkg` fájlban, amelyeket a pacman nem tud törölni.*
 
-```sh title='Run the following command to fix it'
-# Removes all the orphans stored in pkg cache.
+```sh title='Futtassa a következő parancsot a javításhoz'
+# Eltávolítja a pkg gyorsítótárában tárolt összes árvát.
 sudo rm -r /var/cache/pacman/pkg/*
 ```
 
 ### ERROR: module not found: 'nvidia', 'nvidia_modeset', 'nvidia_uvm', 'nvidia_drm'
 
-```sh title='Example'
+```sh title='Példa'
 ==> ERROR: module not found: 'nvidia'
 ==> ERROR: module not found: 'nvidia_modeset'
 ==> ERROR: module not found: 'nvidia_uvm'
 ==> ERROR: module not found: 'nvidia_drm'
 ```
 
-**Two reasons for this error:**
+**A hiba két oka:**
 
-**1) Since Early Module Loading is always enabled in chwd, mkinitcpio consistently expects the presence of NVIDIA modules therefore this error arises when these modules are missing.**
+**1) Mivel a korai modulbetöltés mindig engedélyezve van a chwd parancsban, az mkinitcpio következetesen NVIDIA modulok jelenlétét várja, ezért ez a hiba akkor jelentkezik, ha ezek a modulok hiányoznak.**
 
-**2) You might be missing NVIDIA modules from other installed kernels on your system.**
+**2) Lehetséges, hogy hiányoznak az NVIDIA modulok a rendszeredre telepített többi kernelből.**
 
-```sh title='Install the following package to fix this error'
+```sh title='Telepítse a következő csomagot a hiba javításához'
 sudo pacman -S nvidia
 ```
 
 ## Cachy Browser
 
-### Why this browser keeps deleting my saved credentials and cookies?
+### Miért törli ez a böngésző folyamatosan a mentett hitelesítő adataimat és sütijeimet?
 
-- *This is because the browser comes with the option `Delete cookies and site data when Cachy Browser is closed` turned on by default.*
-  - **Follow the screenshot showing where to disable it:**
+- *Ez azért van, mert a böngészőben alapértelmezés szerint be van kapcsolva a „Sütik és webhelyadatok törlése a gyorsítótáras böngésző bezárásakor” opció.*
+  - **A képernyőképen látható módon letiltható:**
     <br />
     <ImageComponent imgsrc={import('~/assets/images/cachy-browser-cookies.png')} />
 
-### GitHub Homepage makes the browser unusable and extremely slow.
+### A GitHub honlapja használhatatlanná és rendkívül lassúvá teszi a böngészőt.
 
-- *Cachy Browser due to it's nature of leaning towards privacy. Disables WebGL by default and GitHub depends on it for rendering their homepage*
-  - **Re-enable it as shown in the screenshot**
+- *A Cachy Browser, mivel az adatvédelemre törekszik, alapértelmezés szerint letiltja a WebGL-t, és a GitHub erre támaszkodik a kezdőlap megjelenítéséhez*
+  - **Engedélyezze újra a képernyőképen látható módon**
     <br />
     <ImageComponent imgsrc={import('~/assets/images/cachy-browser-webgl.png')} />
-  - *After disabling this parameter. Restart your browser and try again.*
-*This recommendation also applies to websites that takes advantage of Hardware Acceleration via WebGL such as Photopea.*
+  - *A paraméter letiltása után indítsa újra a böngészőt, és próbálja újra.*
+*Ez az ajánlás azokra a webhelyekre is vonatkozik, amelyek WebGL-en keresztül hardveres gyorsítást használnak, mint például a Photopea.*
 
-### Your browser is being managed by your organization. Do i need to worry?
+### A böngészőjét a szervezete kezeli. Aggódnom kell?
 
-- *No. This is because we include a [policies file](https://github.com/CachyOS/CachyOS-Browser-Settings/blob/master/distribution/policies.json) on which we disable features and add modifications to the browser. Example: `additional search engines.`*
+- *Nem. Ez azért van, mert mellékelünk egy [szabályzatfájlt](https://github.com/CachyOS/CachyOS-Browser-Settings/blob/master/distribution/policies.json), amelyen letiltunk funkciókat és módosításokat adunk hozzá a böngészőhöz. Példa: `további keresőmotorok`.*
 
 ### RFP (Resist Fingerprint Protection)
 
-- Cachy Browser enables `privacy.resistFingerprinting` by default. While it improves privacy, it comes at the cost of some issues for users that are not aware such as the following ones:
-  - Rendering artifacts
-  - Dark theme not applying
-  - Unable to login in certain websites (Twitch)
-  - Some keybind combinations do not work
+- A Cachy Browser alapértelmezés szerint engedélyezi a `privacy.resistFingerprinting` funkciót. Bár javítja az adatvédelmet, bizonyos problémákat okozhat azoknál a felhasználóknál, akik nincsenek tisztában ezzel, például a következőket:
+  - Műhibák a renderelésekor
+  - A sötét mód nem alkalmazható
+  - Bizonyos weboldalakon nem lehet bejelentkezni (Twitch)
+  - Néhány billentyűkombináció nem működik
 
-- To verify if this feature is the one causing the issue you are currently experiencing. Take a look to the following [Mozilla Article](https://support.mozilla.org/en-US/kb/resist-fingerprinting) and expand the **How might Resist Fingerprinting break web pages?** section.
+- Annak ellenőrzéséhez, hogy ez a funkció okozza-e a jelenlegi problémát, tekintse meg a következő [Mozilla cikket](https://support.mozilla.org/hu/kb/resist-fingerprinting), és bontsa ki a **Hogyan ronthatja a weboldalakat a Resist Fingerprinting?** részt.
 
-*In order to disable RFP, go to `about:config` and search for **privacy.resistFingerprinting** and set it to `false`*
+*Az RFP letiltásához menjen az `about:config` oldalra, keresd meg a **privacy.resistFingerprinting** fájlt, és állítsd `false`-ra*.
 
 <br />
     <ImageComponent imgsrc={import('~/assets/images/cachy-browser-resist-fingerprint.png')} />

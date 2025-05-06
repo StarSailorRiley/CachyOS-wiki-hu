@@ -1,90 +1,90 @@
 ---
-title: How To Install CachyOS & Partition Guide
-description: Erase Disk Installation
+title: A CachyOS telepítési és particionálási útmutatója
+description: \"Lemez törlése" (Erase Disk) telepítés
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-:::caution
-Secure boot must be disabled when installing CachyOS. To setup secure boot after install. Check [Secure Boot Setup.](/configuration/secure_boot_setup)
+:::caution[Figyelem]
+A CachyOS telepítésekor ki kell kapcsolni a Secure Boot-ot. A Secure Boot telepítés utáni beállításához tekintsen a [Secure Boot beállítás](/configuration/secure_boot_setup)-ra
 :::
 
-:::tip
-It is highly recommended to restart the ISO after a failed installation attempt.
+:::tip[Tipp]
+Sikertelen telepítési kísérlet után erősen ajánlott újraindítani az ISO-t.
 
-Otherwise, continuous errors can happen during the installation process.
+Ellenkező esetben folyamatos hibák léphetnek fel a telepítési folyamat során.
 
-This happens because the installer doesn't properly unmount partitions on a failed install.
+Ez azért történik, mert a telepítő nem tudja megfelelően unmountolni a partíciókat egy sikertelen telepítés esetén.
 
 :::
 
-## Erase Disk
+## Lemez törlése
 
-The "Erase Disk" Option in Calamares will wipe the selected disk and install CachyOS to the target.
+A Calamares „Lemez törlése” opciója törli a kiválasztott lemezt, és telepíti a CachyOS-t a célhelyre.
 
 <Steps>
 
-1. Boot into the ISO and click on **Launch Installer**.
+1. Indítsa el az ISO-t, és kattintson a **Telepítő indítása** gombra.
 
-2. Select the preferred **Boot Manager**. Check the [Boot Managers](/installation/boot_managers) section for more information.
+2. Válassza ki a kívánt **Boot manager**-t. További információkért tekintse meg a [Boot managerek](/installation/boot_managers) részt.
 
-3. Set the preferred **Language** and **Region/Timezone**.
+3. Állítsa be a kívánt **Nyelv** és **Régió/Időzóna** beállításokat.
 
-4. Configure **Keyboard Layout**.
+4. Konfigurálja a **Billentyűzetkiosztás** beállításokat.
 
-5. Select **Erase Disk** and choose a [Filesystem](/installation/filesystem).
+5. Válassza a **Lemez törlése** lehetőséget, és válasszon egy [Fájlrendszer](/installation/filesystem) lehetőséget.
 
-6. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+6. Válassza ki a kívánt **Desktop környezetet**, lásd: [Desktop környezetek](/installation/desktop_environments).
 
-7. Customize which packages should or should not be installed during the installation process.
+7. Szabja testre, hogy mely csomagokat kell és nem kell telepíteni a telepítési folyamat során.
 
-8. Setup login credentials.
+8. Állítsa be a bejelentkezési adatokat.
 
-9. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+9. Gondosan olvassa el a telepítési összefoglalót az Áttekintés oldalon. Ha minden helyesnek tűnik, folytassa a telepítést a ***Telepítés most*** gombra kattintva. Ellenkező esetben térjen vissza, és végezze el a szükséges módosításokat.
 
 </Steps>
 
-## Manual Partitioning
+## Manuális particionálás
 
 ### UEFI/GPT
 
-The partition table for each boot manager varies. Please follow the correct instructions for each.
+Egyes boot managerek partíciós táblája eltérő. Kérjük, kövesse az egyesekhez tartozó megfelelő utasításokat.
 
 <Tabs>
 
-<TabItem label='systemd-boot & rEFInd & Limine'>
+<TabItem label='systemd-boot és rEFInd és Limine'>
 
 <Steps>
 
-1. Boot into the ISO and click the **Launch Installer** button
+1. Indítsa el az ISO-t, és kattintson a **Telepítő indítása** gombra.
 
-2. Set the preferred **Language** and **Region/Timezone**.
+2. Állítsa be a kívánt **Nyelv** és **Régió/Időzóna** beállításokat.
 
-3. Configure **Keyboard Layout**.
+3. Konfigurálja a **Billentyűzetkiosztás** beállításokat.
 
-4. Select **Manual partitioning**.
+4. Válassza a **Manuális particionálás** lehetőséget.
 
-5. Create a new partition with the following:
-    * Size: ***2048MiB***
-    * Filesystem: ***FAT32***
-    * Mount point: ***/boot***
-    * Flags: **boot**
+5. Hozzon létre egy új partíciót a következőkkel:
+    * Méret: ***2048MiB***
+    * Fájlrendszer: ***FAT32***
+    * Mount pont: ***/boot***
+    * Jelzők: **boot**
 
-6. Create another partition for ***root***:
-    * Size: ***At least 20000MiB***
-    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
-    * Mount point: ***/***
-    * Flags:
+6. Hozzon létre egy másik partíciót a ***root*** számára:
+    * Méret: ***Legalább 20000MiB***
+    * Fájlrendszer: Bármely, lásd: [Fájlrendszer](/installation/filesystem)
+    * Mount pont: ***/***
+    * Jelzők:
 
-7. Double check that ***Install boot loader on:*** is pointing to /boot
+7. Ellenőrizze, hogy a ***Bootloader telepítése erre:*** a /boot-ra mutat
 
-8. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+8. Válassza ki a kívánt **Desktop környezetet**, lásd: [Desktop környezetek](/installation/desktop_environments).
 
-9. Customize which packages should or should not be installed during the installation process.
+9. Szabja testre, hogy mely csomagokat kell és nem kell telepíteni a telepítési folyamat során.
 
-10. Setup login credentials.
+10. Állítsa be a bejelentkezési adatokat.
 
-11. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+11. Gondosan olvassa el a telepítési összefoglalót az Áttekintés oldalon. Ha minden helyesnek tűnik, folytassa a telepítést a ***Telepítés most*** gombra kattintva. Ellenkező esetben térjen vissza, és végezze el a szükséges módosításokat.
 
 </Steps>
 
@@ -94,35 +94,35 @@ The partition table for each boot manager varies. Please follow the correct inst
 
 <Steps>
 
-1. Boot into the ISO and click the **Launch Installer** button
+1. Indítsa el az ISO-t, és kattintson a **Telepítő indítása** gombra.
 
-2. Set the preferred **Language** and **Region/Timezone**.
+2. Állítsa be a kívánt **Nyelv** és **Régió/Időzóna** beállításokat.
 
-3. Configure **Keyboard Layout**.
+3. Konfigurálja a **Billentyűzetkiosztás** beállításokat.
 
-4. Select **Manual partitioning**.
+4. Válassza a **Manuális particionálás** lehetőséget.
 
-5. Create a new partition with the following:
-    * Size: ***At least 100MiB***
-    * Filesystem: ***FAT32***
-    * Mount point: ***/boot/efi***
-    * Flags: **boot**
+5. Hozzon létre egy új partíciót a következőkkel:
+    * Méret: ***Legalább 100MiB***
+    * Fájlrendszer: ***FAT32***
+    * Mount pont: ***/boot/efi***
+    * Jelzők: **boot**
 
-6. Create another partition for ***root***:
-    * Size: ***At least 20000MiB***
-    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
-    * Mount point: ***/***
-    * Flags:
+6. Hozzon létre egy másik partíciót a ***root*** számára:
+    * Méret: ***Legalább 20000MiB***
+    * Fájlrendszer: Bármely, lásd: [Fájlrendszer](/installation/filesystem)
+    * Mount pont: ***/***
+    * Jelzők:
 
-7. Double check that ***Install boot loader on:*** is pointing to /boot/efi
+7. Ellenőrizze, hogy a ***Bootloader telepítése erre:*** a /boot/efi-re mutat
 
-8. Select the **Desktop Environment** of choice, see [Desktop Environments](/installation/desktop_environments).
+8. Válassza ki a kívánt **Desktop környezetet**, lásd: [Desktop környezetek](/installation/desktop_environments).
 
-9. Customize which packages should or should not be installed during the installation process.
+9. Szabja testre, hogy mely csomagokat kell és nem kell telepíteni a telepítési folyamat során.
 
-10. Setup login credentials.
+10. Állítsa be a bejelentkezési adatokat.
 
-11. Review the installation summary on the Overview Page carefully. Proceed with the installation by clicking on ***Install Now*** if everything looks correct. Otherwise, go back and make any necessary changes.
+11. Gondosan olvassa el a telepítési összefoglalót az Áttekintés oldalon. Ha minden helyesnek tűnik, folytassa a telepítést a ***Telepítés most*** gombra kattintva. Ellenkező esetben térjen vissza, és végezze el a szükséges módosításokat.
 
 </Steps>
 
@@ -138,29 +138,29 @@ The partition table for each boot manager varies. Please follow the correct inst
 
 <Steps>
 
-1. Boot into the ISO and click the **Launch Installer** button
+1. Indítsa el az ISO-t, és kattintson a **Telepítő indítása** gombra.
 
-2. Set your preferred **Language** and **Region/Timezone**.
+2. Állítsa be a kívánt **Nyelv** és **Régió/Időzóna** beállításokat.
 
-3. Configure your **Keyboard Layout**.
+3. Konfigurálja a **Billentyűzetkiosztás** beállításokat.
 
-4. Select **Manual partitioning**.
+4. Válassza a **Manuális particionálás** lehetőséget.
 
-5. Create a new partition with the following:
-    * Size: ***At least 20000MiB***
-    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
-    * Mount point: ***/***
-    * Flags:
+5. Hozzon létre egy új partíciót a következőkkel:
+    * Méret: ***Legalább 20000MiB***
+    * Fájlrendszer: Bármely, lásd: [Fájlrendszer](/installation/filesystem)
+    * Mount pont: ***/***
+    * Jelzők:
 
-6. Double check that ***Install boot loader on:*** is pointing to your boot drive e.g: /dev/sda
+6. Ellenőrizze, hogy a ***Bootloader telepítése erre:*** a rendszerindító meghajtójára mutat, pl.: /dev/sda
 
-7. Pick the **Desktop Environment** you'd like to use, see [Desktop Environments](/installation/desktop_environments).
+7. Válassza ki a kívánt **Desktop környezetet**, lásd: [Desktop környezetek](/installation/desktop_environments).
 
-8. Select the specific packages you wish to install from the provided list, and deselect any that you do not require.
+8. Válassza ki a telepíteni kívánt csomagokat a megadott listából, és törölje a nem szükségesek jelölését.
 
-9. Setup your login credentials.
+9. Állítsa be a bejelentkezési adatokat.
 
-10. Review the installation summary on the Overview Page carefully. If all the settings look correct for you, proceed with the installation by clicking on ***Install Now***. Otherwise, go back and make any necessary changes.
+10. Gondosan olvassa el a telepítési összefoglalót az Áttekintés oldalon. Ha minden helyesnek tűnik, folytassa a telepítést a ***Telepítés most*** gombra kattintva. Ellenkező esetben térjen vissza, és végezze el a szükséges módosításokat.
 
 </Steps>
 
@@ -170,35 +170,35 @@ The partition table for each boot manager varies. Please follow the correct inst
 
 <Steps>
 
-1. Boot into the ISO and click the **Launch Installer** button
+1. Indítsa el az ISO-t, és kattintson a **Telepítő indítása** gombra.
 
-2. Set your preferred **Language** and **Region/Timezone**.
+2. Állítsa be a kívánt **Nyelv** és **Régió/Időzóna** beállításokat.
 
-3. Configure your **Keyboard Layout**.
+3. Konfigurálja a **Billentyűzetkiosztás** beállításokat.
 
-4. Select **Manual partitioning**.
+4. Válassza a **Manuális particionálás** lehetőséget.
 
-5. Create a new partition with the following:
-    * Size: ***At least 1000MiB***
-    * Filesystem: **FAT32**
-    * Mount point: ***/boot***
-    * Flags: **boot**
+5. Hozzon létre egy új partíciót a következőkkel:
+    * Méret: ***Legalább 1000MiB***
+    * Fájlrendszer: ***FAT32***
+    * Mount pont: ***/boot***
+    * Jelzők: **boot**
 
-6. Create another partition for ***root***:
-    * Size: ***At least 20000MiB***
-    * Filesystem: Any, refer [Filesystem](/installation/filesystem)
-    * Mount point: ***/***
-    * Flags:
+6. Hozzon létre egy másik partíciót a ***root*** számára:
+    * Méret: ***Legalább 20000MiB***
+    * Fájlrendszer: Bármely, lásd: [Fájlrendszer](/installation/filesystem)
+    * Mount pont: ***/***
+    * Jelzők:
 
-7. Double check that ***Install boot loader on:*** is pointing to your boot drive e.g: /dev/sda
+7. Ellenőrizze, hogy a ***Bootloader telepítése erre:*** a rendszerindító meghajtójára mutat, pl.: /dev/sda
 
-8. Pick the **Desktop Environment** you'd like to use, see [Desktop Environments](/installation/desktop_environments).
+8. Válassza ki a kívánt **Desktop környezetet**, lásd: [Desktop környezetek](/installation/desktop_environments).
 
-9. Select the specific packages you wish to install from the provided list, and deselect any that you do not require.
+9. Válassza ki a telepíteni kívánt csomagokat a megadott listából, és törölje a nem szükségesek jelölését.
 
-10. Setup your login credentials.
+10. Állítsa be a bejelentkezési adatokat.
 
-11. Review the installation summary on the Overview Page carefully. If all the settings look correct for you, proceed with the installation by clicking on ***Install Now***. Otherwise, go back and make any necessary changes.
+11. Gondosan olvassa el a telepítési összefoglalót az Áttekintés oldalon. Ha minden helyesnek tűnik, folytassa a telepítést a ***Telepítés most*** gombra kattintva. Ellenkező esetben térjen vissza, és végezze el a szükséges módosításokat.
 
 </Steps>
 
@@ -206,18 +206,18 @@ The partition table for each boot manager varies. Please follow the correct inst
 
 </Tabs>
 
-## Dual Booting
+## Kettős rendszerindítás (Dual Booting)
 
-*After manual partitioning, additional setup may be required to configure a dual boot system, especially with `systemd-boot` and `GRUB`.*
+*Manuális particionálás után további beállításokra lehet szükség a kettős rendszerindítású rendszer konfigurálásához, különösen a `systemd-boot` és a `GRUB` használatával.*
 
 <Tabs>
     <TabItem label='systemd-boot'>
-        *We need to copy the Windows EFI binaries to the Linux EFI partition so that the boot manager can recognize them.*
+        *A Windows EFI binárisokat át kell másolnunk a Linux EFI partícióra, hogy a rendszerindító kezelő felismerhesse őket.*
 
         <Steps>
-        1. Locate the `Windows EFI partition` with `lsblk`
+        1. Keresse meg a `Windows EFI partíciót` az `lsblk` paranccsal
 
-            ```sh title='Example'
+            ```sh title='Példa'
             ❯ lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT
             NAME        FSTYPE   SIZE MOUNTPOINT
             zram0               15.3G [SWAP]
@@ -230,21 +230,21 @@ The partition table for each boot manager varies. Please follow the correct inst
             └─nvme0n1p6 btrfs  239.6G /var/tmp
             ```
 
-            *EFI partitions are almost always formatted as `FAT32/vfat`, and since nvme0n1p1 does not have a Linux mount point, assume that this partition is the `Windows EFI partition`.*
+            *Az EFI partíciók szinte mindig `FAT32/vfat` formátumúak, és mivel az nvme0n1p1-nek nincs Linux csatolási pontja, feltételezzük, hogy ez a partíció a `Windows EFI partíció`.*
 
-        2. Temporarily mount the `Windows EFI partition`.
+        2. Ideiglenesen mountolja a `Windows EFI partíciót`.
 
             ```sh
-            ❯ sudo mount /dev/nvme0n1p1 /mnt/WinBoot # Replace `nvme0n1p1` with the partition of Windows's EFI partition
+            ❯ sudo mount /dev/nvme0n1p1 /mnt/WinBoot # Cserélje ki az `nvme0n1p1`-et a Windows EFI partíciójának nevére
             ```
 
-        3. Copy the EFI binaries from the `Windows EFI partition` to the `Linux EFI partition`.
+        3. Másolja az EFI binárisokat a `Windows EFI partícióról` a `Linux EFI partícióra`.
 
             ```sh
             ❯ sudo cp -r /mnt/WinBoot/EFI/* /boot/EFI
             ```
 
-        4. Unmount the previously mounted partition, and Windows should appear in the boot menu on the next startup.
+        4. Unmountolja a korábban mountolt partíciót, és a Windowsnak meg kell jelennie a boot menüben a következő indításkor.
 
             ```sh
             ❯ sudo umount /mnt/WinBoot
@@ -254,17 +254,17 @@ The partition table for each boot manager varies. Please follow the correct inst
     </TabItem>
 
     <TabItem label='GRUB'>
-        *GRUB uses os-prober to automatically detect the Windows EFI partition and add it to the boot menu.*
+        *A GRUB az os-prober-t használja a Windows EFI partíció automatikus felismeréséhez és a rendszerindító menübe való felvételéhez.*
 
         <Steps>
-        1. Install and execute `os-prober`
+        1. Telepítse és futtassa az `os-prober`-t
 
             ```sh
             ❯ sudo pacman -S os-prober
             ❯ sudo os-prober
             ```
 
-        2. Enable `os-prober` in the GRUB configuration file
+        2. Engedélyezze az `os-prober` parancsot a GRUB konfigurációs fájljában
 
             ```sh title='Press CTRL+S to save and CTRL+Q to exit from Micro'
             ❯ sudo micro /etc/default/grub
@@ -278,12 +278,12 @@ The partition table for each boot manager varies. Please follow the correct inst
             ❯ sudo grub-mkconfig -o /boot/grub/grub.cfg
             ```
 
-            **Windows should now be added to the boot menu.**
+            **A Windowsnak most már hozzá kell tartoznia a boot menühöz.**
 
         </Steps>
     </TabItem>
 </Tabs>
 
-## More Information
+## További információk
 
-- [Lord Vexy's dual boot installation walkthrough with the rEFInd boot manager](https://www.youtube.com/watch?v=0Toaq3Vn5qs)
+- [Lord Vexy kettős Dual Boot telepítési útmutatója a rEFInd boot managerrel](https://www.youtube.com/watch?v=0Toaq3Vn5qs)

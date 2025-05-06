@@ -1,93 +1,91 @@
 ---
-title: Offered Boot Managers
-description: Description and recommendations for the currently offered boot managers
+title: Felkínált Boot Managerek
+description: A jelenleg kínált boot managerek leírása és ajánlása
 ---
 
-To offer the best experience across a range of devices, CachyOS currently offers the following boot managers: systemd-boot, rEFInd, GRUB and Limine.
-This wiki article will describe the feature set of each boot manager and also includes our recommendations for when choosing them. For
-configuration, please see [Boot Manager Configuration](/configuration/boot_manager_configuration).
+A lehető legjobb élmény nyújtására a CachyOS jelenleg a következő boot managereket kínálja: systemd-boot, rEFInd, GRUB és Limine.
+Ez a wiki cikk ismerteti az egyes boot managerek funkciókészletét, és tartalmazza a kiválasztásukra vonatkozó ajánlásainkat is. A
+konfigurációhoz lásd: [Boot manager konfiguráció](/configuration/boot_manager_configuration).
 
 ## systemd-boot
 
-Part of systemd family, systemd-boot was created to be as simple as possible, therefore it only has support for UEFI based systems. This simple yet efficient design ensures it is reliable and fast. However this comes at the cost of advanced features supported by other boot managers.
+A systemd család részeként a systemd-bootot a lehető legegyszerűbbre tervezték, ezért csak az UEFI alapú rendszereket támogatja. Ez az egyszerű, mégis hatékony kialakítás biztosítja a megbízhatóságot és a gyorsaságot. Ez azonban a többi boot manager által támogatott fejlett funkciók rovására megy.
 
-### Pros
-- Very simple configuration.
-- Boot entries are separated into multiple files making it easier to manage.
+### Előnyök
+- Nagyon egyszerű konfiguráció.
+- A rendszerindító bejegyzések több fájlba vannak osztva, így könnyebben kezelhetők.
 
-### Cons
- - Does not support BIOS systems.
- - Very barebones design and lacks any kind of theming or customization.
- - Config is not auto-generated unless configured to do so. CachyOS includes systemd-boot manager to offer auto-generated configuration.
- - Only able to read boot images on EFI supported filesystems (FAT, FAT16, FAT32).
- - Inability to find boot images on partitions other than its own.
- - Does not properly support Btrfs snapshot rollbacks due to requirement to store kernel images on the boot partition rather than the root filesystem.
+### Hátrányok
+ - Nem támogatja a BIOS rendszereket.
+ - Nagyon egyszerű kialakítású, és semmilyen témázási vagy testreszabási   lehetőséget nem kínál.
+ - A konfig nem generálódik automatikusan, hacsak nincs erre konfigurálva. A CachyOS tartalmazza a systemd-boot-manager-t az automatikusan generált konfigurációhoz.
+ - Csak EFI által támogatott fájlrendszereken (FAT, FAT16, FAT32) lévő rendszerindító képeket képes olvasni.
+ - A saját partícióján kívül képtelen rendszerindító képeket találni.
+ - Nem támogatja megfelelően a Btrfs snapshot-visszagörgetéseket, mivel a kernel képeket a boot partíción, és nem a root fájlrendszeren kell tárolni.
 
-### Recommendation
+### Ajánlás
 
-Systemd-boot is the recommended and default boot manager for CachyOS. Choose this one if unsure.
+A Systemd-boot a CachyOS ajánlott és alapértelmezett rendszerindító kezelője. Ha bizonytalan, válassza ezt.
 
 ## rEFInd
 
-A fork of rEFIt, rEFInd was primarily made to make it easier for MacOS users to multi-boot. However rEFInd has evolved into being hardware agnostic making it a great choice for multi-booting on any system. The main draw of rEFInd is its ability to scan all storage devices at boot and correspondingly display entries for each OS/Kernel found.
+A rEFIt egy forkja, a rEFInd elsősorban azért készült, hogy megkönnyítse a MacOS felhasználók számára a többrendszeres rendszerindítást. A rEFInd azonban mára hardverfüggetlenné fejlődött, így nagyszerű választássá vált a többrendszeres rendszerindításhoz bármilyen rendszeren. A rEFInd fő vonzereje, hogy képes az összes tárolóeszközt beolvasni rendszerindításkor, és ennek megfelelően megjeleníteni az egyes talált operációs rendszerek/kernelek bejegyzéseit.
 
-### Pros
+### Előnyök
 
-- Autodetection of all operating systems and kernels on storage devices.
-- Little to no configuration required due to aforementioned auto-detection.
-- Much more graphical UI reminiscent of the MacOS Boot selector.
-- Great theming support
-- Optional touch screen support
-- Able to read boot images from EFI filesystems (FAT,FAT16,FAT32) as well as EXT4 and BTRFS. Support for other file systems can be added through installation of EFI drivers from the ``efifs`` package.
+- Az összes operációs rendszer és kernel automatikus felismerése a tárolóeszközökön.
+- A fent említett automatikus felismerésnek köszönhetően kevés vagy semmilyen konfigurációt nem igényel.
+- Sokkal grafikusabb felhasználói felület, amely a MacOS rendszerindító választójára emlékeztet.
+- Nagyszerű téma-támogatás
+- Opcionális érintőképernyő-támogatás
+- Képes rendszerindító képek olvasására EFI fájlrendszerekből (FAT, FAT16, FAT32), valamint EXT4 és BTRFS fájlokból. Más fájlrendszerek támogatása az ``efifs`` csomag EFI illesztőprogramjainak telepítésével adható hozzá.
 
-### Cons
+### Hátrányok
 
-- Does not support BIOS systems.
+- Nem támogatja a BIOS rendszereket.
 
-### Recommendation
+### Ajánlás
 
-rEFInd is the recommended boot manager for booting with multiple operating systems.
+A rEFInd az ajánlott rendszerindító menedzser több operációs rendszerrel történő indításhoz.
 
 ## GRUB
 
-GRUB is the oldest of the available boot managers. It has a very large feature
-set, works on almost every machine and is the most commonly used Linux boot
-manager. The following is a list of its main pros and cons.
+A GRUB a legrégebbi elérhető boot manager. Nagyon széles funkciókészlettel rendelkezik, szinte minden gépen működik, és ez a leggyakrabban használt Linux boot manager. Az alábbiakban felsoroljuk a főbb előnyeit és hátrányait.
 
-### Pros
-- Able to read boot images from almost all available Linux filesystems.
-- Widely used and very easy to find information online.
-- Able to decrypt encrypted boot partitions.
-- The only boot loader offered allowing it to boot BIOS machines.
-- Looks dated. However has great theme support to compensate.
+### Előnyök
+- Szinte az összes elérhető Linux fájlrendszerről képes beolvasni rendszerindító képeket.
+- Széles körben használt és nagyon könnyen megtalálható információ online.
+- Képes dekriptálni az enkriptált boot partíciókat.
+- Az egyetlen olyan boot loader, amely lehetővé teszi BIOS-os gépek indítását.
+- Elavult kinézetű. Azonban nagyszerű téma-támogatással rendelkezik, ami kárpótol érte.
 
-### Cons
-- Bloated due to needing to support much older hardware and needing lots of filesystem drivers.
-- Noticeably slower compared to systemd-boot and rEFInd.
+### Hátrányok
+- Felfújt, mivel sokkal régebbi hardvereket is kell támogatnia, és sok fájlrendszer-illesztőprogramra van szüksége.
+- Észrevehetően lassabb a systemd-boothoz és a rEFIndhoz képest.
 
-### Recommendation
+### Ajánlás
 
-GRUB is the only boot manager that supports boot partition encryption (Different from disk encryption).
+A GRUB az egyetlen boot manager, amely támogatja a boot partíció enkriptálását (különbözik a lemez enkripciótól)
 
 ## Limine
 
-Limine is a modern, advanced, and portable multiprotocol bootloader. It serves as the reference implementation for the Limine boot protocol and supports booting Linux as well as chainloading other boot loaders.
+A Limine egy modern, fejlett és hordozható, többprotokollos rendszerbetöltő. A Limine rendszerbetöltő protokoll referencia implementációjaként szolgál, és támogatja a Linux indítását, valamint más boot loaderek láncbetöltését.
 
-### Pros
+### Előnyök
 
-- Supports multiple boot protocols, including Multiboot2 and the Linux boot protocols.
-- It can boot on both UEFI and BIOS systems, making it versatile for different hardware configurations.
-- Has theming capabilities similar to GRUB.
-- Direct support for Btrfs snapshots, which is enabled by default for installations using Btrfs as a filesystem.
+- Több rendszerindítási protokollt támogat, beleértve a Multiboot2-t és a Linux rendszerindítási protokollokat.
+- UEFI és BIOS rendszereken is képes indulni, így sokoldalúan használható különböző hardverkonfigurációkhoz.
+- A GRUB-hoz hasonló téma-beállítási képességekkel rendelkezik.
+- Közvetlen támogatás a Btrfs snapshotokhoz, amely alapértelmezetten engedélyezve van a Btrfs fájlrendszert használó telepítéseknél.
 
-### Cons
+### Hátrányok
 
-- Only supports a few filesystems, such as FAT12, FAT16, FAT32, and ISO9660 for the `/boot` partition, which may require additional setup for systems using other filesystems.
-- Unlike some other boot loaders, Limine does not automatically add an entry to the NVRAM on UEFI systems; this must be done manually using tools like `efibootmgr` or handled via `limine-entry-tool`, which is preinstalled out of the box on CachyOS.
+- Csak néhány fájlrendszert támogat, például FAT12, FAT16, FAT32 és ISO9660 a `/boot` partícióhoz, ami további beállítást igényelhet más fájlrendszereket használó rendszerek esetén.
+- Néhány más rendszerbetöltővel ellentétben a Limine nem ad hozzá automatikusan bejegyzést az NVRAM-hoz UEFI rendszereken; ezt manuálisan kell elvégezni olyan eszközökkel, mint az `efibootmgr`, vagy a `limine-entry-tool` segítségével, amely előre telepítve van a CachyOS-re.
 
-### Recommendation
+### Ajánlás
 
-Limine is recommended for users who need a lightweight and versatile bootloader that supports both UEFI and BIOS systems. It is particularly suitable for those who prefer a simple setup with theming options and Btrfs snapshot support. Additionally, Limine serves as a modern replacement for GRUB, which has seen fewer updates recently and has faced multiple security issues due to its EFI/filesystem drivers.
+A Limine azoknak a felhasználóknak ajánlott, akiknek egy könnyű és sokoldalú rendszerbetöltőre van szükségük, amely mind az UEFI, mind a BIOS rendszereket támogatja. Különösen alkalmas azok számára, akik az egyszerű beállítást kedvelik, témázási lehetőségekkel és Btrfs snapshot-támogatással. Ezenkívül a Limine a GRUB modern helyettesítőjeként szolgál, amely az utóbbi időben kevesebb frissítést kapott, és számos biztonsági problémával szembesült az EFI/fájlrendszer-illesztőprogramjai miatt.
 
-## TL:DR
-Choose GRUB if the used machine is BIOS only, pick rEFInd if planning on having multiple operating systems on the machine (Especially Windows), otherwise go with systemd-boot.
+## Röviden összefoglalva
+Válassza a GRUB-ot, ha a használt gép csak BIOS-t használ, a rEFInd-et, ha több operációs rendszert tervez a gépen (különösen Windowst), egyébként használja a systemd-boot-ot.
