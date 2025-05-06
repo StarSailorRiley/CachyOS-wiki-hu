@@ -1,27 +1,27 @@
 ---
-title: Downloads and Validation
-description: Download and Validation of CachyOS ISO.
+title: Letöltés és validálás
+description: A CachyOS letöltése és validálása.
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Downloading ISO
+## ISO (lemezkép) letöltése
 
-CachyOS ISO can be obtained from the following sources:
+A CachyOS ISO a következő forrásokból szerezhető be:
 
-*   [Website](<https://cachyos.org/download>)
+*   [Weboldal](<https://cachyos.org/download>)
 *   [SourceForge](<https://sourceforge.net/projects/cachyos-arch/files/>)
-*   [CachyOS Mirror](<https://mirror.cachyos.org/ISO/>)
+*   [CachyOS Letöltési Tükör](<https://mirror.cachyos.org/ISO/>)
 
-## Verifying ISO integrity with SHA256
+## ISO integritásának ellenőrzése SHA256-tal
 
-:::caution[WARNING]
-Always take an extra step to verify the ISOs integrity to avoid any undesired issues at installation or while creating a bootable media.
+:::caution[FIGYELEM]
+Mindig tegyen egy plusz lépést az ISO integritásának ellenőrzésére, hogy elkerülje a nem kívánt problémákat a telepítés vagy a telepítési adathordozó létrehozása során.
 :::
 
-**Current ISO Version:** `250422`
+**Jelenlegi ISO verzió:** `250422`
 
-**SHA256 Hash:** `c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe`
+**SHA256 Hash (Ellenőrző összeg):** `c87272fc0e8476ea187005d416fa0ee7630a50c71c097233960a0fee22cb8bfe`
 
 <Tabs>
 
@@ -29,15 +29,14 @@ Always take an extra step to verify the ISOs integrity to avoid any undesired is
 
 <Steps>
 
-1. Download the [file](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256) containing the SHA256 hash **(Open it with a Text Editor e.g: Notepad).**
-2. Open CMD or PowerShell as Administrator and [navigate](<https://www.wikihow.com/Change-Directories-in-Command-Prompt>) to the path where the ISO and SHA256 files are stored.
-3. Execute the following command:
+1. Töltsd le a [fájlt](https://mirror.cachyos.org/ISO/desktop/250422/cachyos-desktop-linux-250422.iso.sha256), amely tartalmazza a SHA256 hash-t **(Nyisd meg egy szövegszerkesztővel, pl.: Jegyzettömb).**
+2. Nyisd meg a parancssort vagy a PowerShellt rendszergazdaként, és [lépjen](<https://www.wikihow.com/Change-Directories-in-Command-Prompt>) abba a mappába, ahol az ISO és az SHA256 fájlok találhatók.
+3. Hajtsd végre a következő parancsot:
    ```powershell
-   # Example:
+   # Példa:
    certUtil -hashfile cachyos-desktop-linux-250422.iso SHA256
    ```
-4. Compare the certUtil hash output to the one from the downloaded file in **Step 1.** If they match, you can proceed with the CachyOS installation.
-
+4. Hasonlítsd össze a certUtil hash kimenetét az **1. lépésben** letöltött fájl kimenetével. Ha egyeznek, folytathatod a CachyOS telepítését.
 </Steps>
 
 </TabItem>
