@@ -20,7 +20,7 @@ Az elérhető lehetőségek a következők:
 6. A **Cinnamon:** egy Linux desktop környezet, amely a fejlett funkciókat a hagyományos felhasználói élménnyel ötvözi.
 7. A **Cosmic:** **`Jelenleg alfában.`** egy modern, teljesítményorientált desktop környezet, amely Rust és Smithay segítségével készült. A produktivitás és a haladó felhasználók számára tervezett, fejlett funkciókat kínál, miközben letisztult, mégis intuitív felületet biztosít.
 8. Az **i3:** egy népszerű X11-es mozaikszerű ablakkezelő, amely egyetlen, önálló konfigurációs fájljáról és a képernyőterület hatékony kihasználásáról ismert. Tekintse meg i3 [dotfájljainkat](https://github.com/CachyOS/cachyos-i3wm-settings).
-9. A **Hyprland:** egy kinézetre kellemes Wayland kompozitáló, amely dinamikus csempézést használ. Előre konfigurált [dotfájlokkal] érkezik (https://github.com/CachyOS/cachyos-hyprland-settings). **`Bizonyos hardverkonfigurációk esetén instabil`**.
+9. A **Hyprland:** egy kinézetre kellemes Wayland kompozitáló, amely dinamikus csempézést használ. Előre konfigurált [dotfájlokkal](https://github.com/CachyOS/cachyos-hyprland-settings) érkezik. **`Bizonyos hardverkonfigurációk esetén instabil`**.
 10. Az **LXDE:** (Lightweight X11 Desktop Environment) egy gyors és energiatakarékos desktop környezet, amelyet régebbi számítógépeken és erőforrás-korlátos rendszereken való használatra terveztek. Az Openboxot használja alapértelmezett ablakkezelőként, és az egyszerű, letisztult és felhasználóbarát felület biztosítására összpontosít.
 11. Az **LXQt:** egy pehelysúlyú desktop környezet, amely az LXDE és a Razor-qt projektek egyesüléséből jött létre, és Qt-vel készült.
 12. A **Mate Desktop:** egy hagyományos desktop környezet, amely a GNOME 2-ből származik. Klasszikus megjelenése és érzete, egyszerű és intuitív felhasználói felülettel jellemzi. A Mate könnyen használható és nagymértékben testreszabható asztali élményt nyújt azoknak a felhasználóknak, akik a klasszikusabb megjelenést és érzetet kedvelik.
@@ -31,7 +31,7 @@ Az elérhető lehetőségek a következők:
 17. A **Wayfire:** egy wlroots-alapú Wayland kompozitor, amely egyensúlyt teremt a testreszabhatóság, a bővíthetőség és az esztétika között. Keresse a Wayfire [dotfájljainkat](https://github.com/CachyOS/cachyos-wayfire-settings).
 
 :::note[Megjegyzés]
-A Hyprland természetéből adódóan, beleértve a hibás változtatásokat és az instabilitást, úgy döntöttünk, hogy csak a dotfájljainkat tartjuk karban, de ne számítson segítségre a konfigurációnkon kívül.
+A Hyprland természetéből adódóan, beleértve a hibás változtatásokat és az instabilitást, úgy döntöttünk, hogy csak a dotfájljainkat tartjuk karban, ne számítson segítségre a konfigurációnkon kívül.
 
 Ezúttal próbáljon meg segítséget kérni a Discordon, és várjon a közösség válaszára.
 :::

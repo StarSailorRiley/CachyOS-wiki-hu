@@ -1,86 +1,86 @@
 ---
-title: Managing Linux Kernels & Sched-ext framework with the CachyOS Kernel Manager
-description: The CachyOS Kernel Manager is a powerful tool for managing kernels, allowing users to easily install or build custom kernels with ease.
+title: Linux kernelek és Sched-ext framework kezelése a CachyOS Kernel Managerrel
+description: A CachyOS Kernel Manager egy hatékony eszköz a kernelek kezelésére, amely lehetővé teszi a felhasználók számára, hogy könnyedén telepítsenek vagy építsenek egyéni kerneleket.
 ---
 
 import ImageComponent from '~/components/image-component.astro';
 
-Installing a Kernel from a Repository
+Kernel telepítése egy repository-ból
 ---------------------------------------
 
-**The CachyOS Kernel Manager makes it simple to install and manage kernels from any Arch Linux repository.**
+**A CachyOS Kernel Manager egyszerűvé teszi a kernelek telepítését és kezelését bármely Arch Linux adattárból.**
 
-To install a kernel. Launch the `CachyOS Kernel Manager` application and choose the desired kernel by ticking the box `[]` from the list of all the available options then just press on `Execute` to start the kernel installation.
+Kernel telepítéséhez indítsa el a `CachyOS Kernel Manager` alkalmazást, és válassza ki a kívánt kernelt a `[]` jelölőnégyzet bejelölésével az összes elérhető opció listájából, majd kattintson az `Execute` gombra a kernel telepítésének megkezdéséhez.
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/cachyos-km1.png')} />
 
 :::note
-The `Execute` button becomes unavailable when you choose an already installed kernel.
+Az `Execute` gomb nem érhető el, ha egy már telepített kernelt választ.
 :::
 
-Configuring and Building a custom CachyOS Kernel
+Egyéni CachyOS kernel konfigurálása és építése
 ---------------------------------
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/cachyos-km2.png')} />
 
-**The CachyOS Kernel Manager makes it easy to configure and build a custom CachyOS kernel.**
+**The CachyOS Kernel Managerrel egyszerűen konfigurálható és építhető egyéni CachyOS kernel.**
 
 :::note
-The CachyOS Kernel Manager is specifically designed to build custom kernels for **CachyOS variants** and does not support building or configuring a standard Arch Linux kernel or any other variant.
+A CachyOS Kernel Manager kifejezetten a **CachyOS variánsokhoz** készült egyéni kernelek építésére készült, és nem támogatja a szabványos Arch Linux kernel vagy bármely más variáns építését vagy konfigurálását.
 :::
 
-*To get started. Open the Kernel Manager and click on the `Configure` button to start adjusting various settings, such as the desired scheduler, tick rate and more. Once you have made your desired changes click on `Build kernel` button to begin building your custom CachyOS kernel.*
+*A kezdéshez nyissa meg a Kernel Manager-t, és kattintson a `Configure` gombra a különböző beállítások, például a kívánt ütemező, az órajel-sebesség és egyebek módosításához. Miután elvégezte a kívánt módosításokat, kattintson a `Build kernel` gombra az egyéni CachyOS kernel építésének megkezdéséhez.*
 
-**Available configuration options:**
+**Elérhető konfigurációs lehetőségek:**
 
-* *`Custom package name`: **With this option, you can name your kernel to whatever you want example: `linux-custom-cachy`***
-* *Scheduler (BORE, RC, RT, RT+BORE, EEVDF and BMQ)*
-* *Enable CachyOS config*
-* *Tweak Configuration via nconfig, menuconfig, xconfig, or gconfig*
-* *Enable/Disable NUMA*
-* *Enable/Disable Modprobed-db*
-* *KBUILD CFLAGS (-O3 or -O2)*
-* *Performance governor as default*
-* *Enable BBR3*
-* *Tick rate selection (100Hz, 250Hz, 300Hz, 500Hz, 600Hz, 750Hz, 1000Hz)*
-* *Tickless mode (idle, periodic, full)*
-* *Preemption (Full, Voluntary or Server)*
-* *Transparent Hugepages (Always or Madvise)*
-* *Enable/Disable DAMON*
-* *Enable/Disable Automatic CPU arch detection*
-* *Apply kernel optimization for specific CPU architectures*
-* *Enable LTO (Full, Thin, No)*
-* *Build ZFS Module*
-* *Build NVIDIA Closed Module*
-* *Build NVIDIA Open Module*
-* *Include vmlinux with debug information/symbols*
-* *Load/Save Kernel Manager config preset: `(Only presets from the manager itself)`*
-* *Kernel Patches Management (Remote and Local support)*
+* *`Custom package name`: **Ezzel az opcióval a kernel nevét bármilyen névre adhatod, például: `linux-custom-cachy`***
+* *Scheduler (BORE, RC, RT, RT+BORE, EEVDF és BMQ): Ütemező*
+* *Enable CachyOS config: Konfig engedélyezése*
+* *Tweak Configuration via nconfig, menuconfig, xconfig, or gconfig: Konfig finomhangolása*
+* *Enable/Disable NUMA: NUMA ki/bekapcsolása*
+* *Enable/Disable Modprobed-db: Modprobed-db ki/bekapcsolása*
+* *KBUILD CFLAGS (-O3 vagy -O2)*
+* *Performance governor as default: Teljesítményszabályozó alapértelmezettként*
+* *Enable BBR3: BBR3 bekapcsolása*
+* *Tick rate kiválasztás (100Hz, 250Hz, 300Hz, 500Hz, 600Hz, 750Hz, 1000Hz)*
+* *Tickless mód (idle, periodic, full)*
+* *Preemption (Full, Voluntary vagy Server): Preempció*
+* *Transparent Hugepages (Always vagy Madvise)*
+* *Enable/Disable DAMON: DAMON ki/bekapcsolása*
+* *Enable/Disable Automatic CPU arch detection: Automatikus CPU arch észlelés ki/bekapcsolása*
+* *Apply kernel optimization for specific CPU architectures: Kernel optimalizáció adott CPU architectúrákhoz*
+* *Enable LTO (Full, Thin, No): LTO bekapcsolása*
+* *Build ZFS Module: ZFS modul építése*
+* *Build NVIDIA Closed Module: NVIDIA zárt modul építése*
+* *Build NVIDIA Open Module: NVIDIA nyílt modul építése*
+* *Include vmlinux with debug information/symbols: vmlinux debug beillesztése*
+* *Kernel Manager konfig előbeállítás betöltése/mentése: `(Csak magából a Managerből származó beállítások)`*
+* *Kernel Patch Management (Remote és Local támogatás)*
 
-**Once the kernel has been successfully built, you will be prompted for your sudo password to install the kernel.**
+**A kernel sikeres felépítése után a rendszer kéri a sudo jelszavát a kernel telepítéséhez.**
 
-## Sched-ext Framework Management
+## Sched-ext framework management
 
-**The Kernel Manager provides a graphical user interface (GUI) for managing and controlling sched-ext schedulers. Access the GUI by clicking on the `sched-ext scheduler config` button in the main window.**
+**A Kernel Manager grafikus felhasználói felületet (GUI) biztosít a sched-ext ütemezők kezeléséhez és vezérléséhez. A grafikus felület a főablakban található „sched-ext ütemező konfigurációja” gombra kattintva érhető el.**
 
 <br />
 <ImageComponent imgsrc={import('~/assets/images/cachyos-km3.png')} />
 
-This GUI allows you to:
+Ez a grafikus felhasználói felület a következőket teszi lehetővé:
 
-- **Switch between different sched-ext (scx) schedulers.**
-- **Enable or disable the scheduler service.**
-- **Check the currently running scheduler.**
-- **Set scheduler flags and profiles.  `Currently only bpfland and lavd support profiles.`**
+- **Váltás a különböző sched-ext (scx) ütemezők között.**
+- **Az ütemező szolgáltatás engedélyezése vagy letiltása.**
+- **Az aktuálisan futó ütemező ellenőrzése.**
+- **Ütemező jelzők és profilok beállítása. `Jelenleg csak a bpfland és a lavd profilokat támogatja.`**
 
-In order to achieve this, the Kernel Manager uses the `scx_loader` with a configuration stored in:
+Ennek eléréséhez a Kernel Manager az `scx_loader` fájlt használja, amelynek konfigurációja a következő helyen van tárolva:
 
-`/etc/scx_loader.toml`.  For more information about the `scx_loader` configuration file, check [this documentation](https://github.com/sched-ext/scx/blob/main/rust/scx_loader/configuration.md).
+`/etc/scx_loader.toml`.  Az `scx_loader` konfigurációs fájllal kapcsolatos további információkért tekintse meg [ezt a dokumentációt](https://github.com/sched-ext/scx/blob/main/rust/scx_loader/configuration.md).
 
-- **How does the `scx_loader` work?**
-    - Once you have selected the scheduler and profile, the scx_loader will then start the scheduler with the profile that has been selected and save this configuration to the `/etc/scx_loader.toml` file in order to achieve persistence across reboots. An example of what the file will look like choosing `scx_bpfland` with the `Gaming` profile:
+- **Hogyan működik az `scx_loader`?**
+    - Miután kiválasztotta az ütemezőt és a profilt, az scx_loader elindítja az ütemezőt a kiválasztott profillal, és elmenti ezt a konfigurációt az `/etc/scx_loader.toml` fájlba, hogy az újraindítások után is megőrizze azt. Példa arra, hogy hogyan fog kinézni a fájl az `scx_bpfland` beállítással és a `Gaming` profillal:
         ```toml
         default_sched = "scx_bpfland"
         default_mode = "Gaming"
@@ -92,25 +92,25 @@ In order to achieve this, the Kernel Manager uses the `scx_loader` with a config
         powersave_mode = ["-m", "powersave"]
         ```
 
-### Scheduler Profiles
+### Ütemezőprofilok
 
-- **What are the "profiles" for?**
-  - They are presets for the scheduler that modify flags based on proven combinations to enhance effectiveness for specific use cases, such as "Gaming."
+- **Mire valók a "profilok"?**
+  - Ezek az ütemező előre beállított értékei, amelyek a bevált kombinációk alapján módosítják a jelzőket, hogy növeljék a hatékonyságot bizonyos felhasználási esetekben, például a "Játék" esetében.
 
-**Check the table for a more detailed look.**
+**A részletesebb áttekintésért tekintse meg a táblázatot.**
 
 #### Bpfland
 
-|   Profile Name  	|  Command-line Flags  	|                                                         Description                                                         	|
+|   Profil neve  	|  Parancssori jelzők  	|                                                         Leírás                                                         	|
 |:---------------:	|:--------------------:	|:---------------------------------------------------------------------------------------------------------------------------:	|
-| **Low Latency** 	| `-k -s 5000 -l 5000` 	| Meant to lower latency at the cost of throughput. Suitable for real-time applications like Audio Processing and Multimedia. 	|
-| **Gaming**      	| `-m performance`  	| Optimizes for high performance in games. Prioritizes P-cores over E-cores on Intel CPUs and CCDs on Ryzen X3D CPUs.         	|
-| **Power Save**  	| `-m powersave`       	| Prioritizes power efficiency. Favors less performant cores (e.g E-cores on Intel).                                          	|
-| **Server**        | `-c 0`                | Disables the interactive task classification in Bpfland making more capable for a server, an increase of approximately 2-3% in server workloads is expected
+| **Low Latency** 	| `-k -s 5000 -l 5000` 	| Célja a késleltetés csökkentése az átviteli sebesség rovására. Valós idejű alkalmazásokhoz, például hangfeldolgozáshoz és multimédiához alkalmas. 	|
+| **Gaming**      	| `-m performance`  	| Játékokban a nagy teljesítmény érdekében optimalizál. Az Intel CPU-kon a P-magokat részesíti előnyben az E-magokkal szemben, a Ryzen X3D CPU-kon pedig a CCD-ket.        	|
+| **Power Save**  	| `-m powersave`       	| Az energiahatékonyságot helyezi előtérbe. A kisebb teljesítményű magokat részesíti előnyben (pl. az Intel E-magjait).                                          	|
+| **Server**        | `-c 0`                | Letiltja az interaktív feladatosztályozást a Bpflandban, így hatékonyabbá teszi a szerverek működését, ami várhatóan körülbelül 2-3%-os szerverterhelés-növekedést eredményez.
 
 #### LAVD
 
-|       Profile Name       	| Command-line Flags 	|                                                             Description                                                            	|
+|       Profil neve       	| Parancssori jelzők 	|                                                             Leírás                                                            	|
 |:------------------------:	|:------------------:	|:----------------------------------------------------------------------------------------------------------------------------------:	|
-| **Gaming & Low Latency** 	|   `--performance`  	| Maximizes performance by using all available cores, prioritizing physical cores.                                                   	|
-|      **Power save**      	|    `--powersave`   	| Minimizes power consumption while maintaining reasonable performance. Prioritizes efficient cores and threads over physical cores. 	|
+| **Gaming & Low Latency** 	|   `--performance`  	| Maximalizálja a teljesítményt az összes elérhető mag kihasználásával, a fizikai magokat előnyben részesíti.                                                  	|
+|      **Power save**      	|    `--powersave`   	| Minimalizálja az energiafogyasztást, miközben fenntartja az elfogadható teljesítményt. A hatékony magokat és szálakat részesíti előnyben a fizikai magokkal szemben. 	|

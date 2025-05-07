@@ -1,115 +1,108 @@
 ---
 title: CachyOS Kernel
-description: Features and changes on the CachyOS kernel
+description: A CachyOS kernel funkciói és változásai
 ---
 
-The CachyOS Kernel is a customized kernel which utilizes enhancements, configurations and patches from upstream.
+A CachyOS Kernel egy testreszabott kernel, amely fejlesztéseket, konfigurációkat és javításokat használ upstream forgalomból.
 
-## Features
+## Funkciók
 
-- Choose between 3 kernel schedulers and various [sched-ext](/configuration/sched-ext) schedulers for improved responsiveness
-- AMD P-State Improvements
-- Latest BBRv3 by Google
-- le9uo for significantly improved responsiveness during high memory load
-- Up-to-date NTSYNC patchset, used with a compatible build of wine/proton
-- Compatibility with T2 MacOS devices with patches from [t2linux](https://github.com/t2linux/linux-t2-patches/)
-- Allows reading per-core CPU energy usage for AMD users
-- ACS Override and v412loopback
-- VHBA module for emulating CD/DVD-ROM devices
-- Latest ZSTD patchset
-- Various other patches that focus on improving performance (optimized compiler flags, cryptographic improvements, memory management tweaks)
+- Választhat 3 kernel ütemező és különféle [sched-ext](/configuration/sched-ext) ütemezők közül a jobb válaszidő érdekében
+- AMD P-State fejlesztések
+- Legújabb BBRv3 a Google-tól
+- le9uo a jelentősen jobb válaszidő érdekében nagy memóriaterhelés esetén
+- Naprakész NTSYNC patchkészlet, kompatibilis wine/proton builddel használható
+- Kompatibilitás a T2 MacOS eszközökkel a [t2linux](https://github.com/t2linux/linux-t2-patches/) javításaival
+- Lehetővé teszi a magonkénti CPU energiafelhasználás olvasását AMD felhasználók számára
+- ACS Override és v412loopback
+- VHBA modul CD/DVD-ROM eszközök emulálásához
+- Legújabb ZSTD patchkészlet
+- Különböző egyéb javítások, amelyek a teljesítmény javítására összpontosítanak (optimalizált kompilálócímkék, kriptográfiai fejlesztések, memóriakezelési finomhangolások)
 
-For a more comprehensive list of the patches that CachyOS offers, please see the the more complete
-[feature list](https://github.com/CachyOS/linux-cachyos/?tab=readme-ov-file#features), [kernel-patches repository](https://github.com/CachyOS/kernel-patches)
-and [CachyOS's Linux Source Tree](https://github.com/CachyOS/linux).
+A CachyOS által kínált javítások átfogóbb listájáért tekintse meg a teljesebb
+[funkciólistát](https://github.com/CachyOS/linux-cachyos/?tab=readme-ov-file#features), a [kernel-patches repository](https://github.com/CachyOS/kernel-patches)-t
+és a [CachyOS Linux forrásfáját](https://github.com/CachyOS/linux).
 
-## Variants
+## Változatok
 
-CachyOS offers a diverse range of kernel options. All of the kernels we provide are shipped with the [CachyOS Base Patchset](https://github.com/CachyOS/kernel-patches). 
-For each of the kernels, there is a [corresponding `-lto` variant](#package-naming-convention) that 
-is built  with [clang](https://clang.llvm.org/) instead of [GCC](https://gcc.gnu.org/). Both the default and `-rc` kernel are exceptions to this because they are
-built with [ThinLTO](https://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html) by default and therefore has corresponding `-gcc` kernel variants instead.
+A CachyOS változatos kernel opciókat kínál. Az általunk biztosított összes kernel tartalmazza a [CachyOS Alap Patchkészlet](https://github.com/CachyOS/kernel-patches)-et.
+Minden kernelhez tartozik egy [megfelelő `-lto` variáns](#package-naming-convention), amely [clang](https://clang.llvm.org/) kapcsolóval készült [GCC](https://gcc.gnu.org/) helyett. Mind az alapértelmezett, mind a `-rc` kernel kivétel ez alól, mivel alapértelmezés szerint [ThinLTO](https://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html) kapcsolóval készültek, ezért ehelyett `-gcc` kernel variánsokkal rendelkeznek.
 
 - **linux-cachyos**
-    - Default kernel. This is the recommended kernel if you're unsure about which kernel should be used.
-    - Uses the [BORE](https://github.com/firelzrd/bore-scheduler) scheduler.
-    - Built with clang and ThinLTO by default to produce more optimized binaries.
-    - Profiled with our own [AutoFDO](https://cachyos.org/blog/2411-kernel-autofdo/) profile for improved performance. [Script](https://github.com/CachyOS/cachyos-benchmarker/blob/master/kernel-autofdo.sh) used to profile the kernel.
+    - Alapértelmezett kernel. Ez az ajánlott kernel, ha nem biztos benne, hogy melyik kernelt kell használni.
+    - A [BORE](https://github.com/firelzrd/bore-scheduler) ütemezőt használja.
+    - Alapértelmezés szerint clang és ThinLTO segítségével készült az optimalizáltabb bináris fájlok létrehozása érdekében.
+    - Saját [AutoFDO](https://cachyos.org/blog/2411-kernel-autofdo/) profilunkkal profilizálva a jobb teljesítmény érdekében. A kernel profilozásához a [Script](https://github.com/CachyOS/cachyos-benchmarker/blob/master/kernel-autofdo.sh) szolgál.
 - **linux-cachyos-bore**
-    - Uses the BORE scheduler.
+    - A BORE ütemezőt használja.
 - **linux-cachyos-bmq**
-    - Uses the BMQ scheduler from [Project C](https://gitlab.com/alfredchen/projectc/) by Alfred Chen. 
-        - **Does not support sched-ext**.
+    - Az Alfred Chen által készített [Project C](https://gitlab.com/alfredchen/projectc/) BMQ ütemezőjét használja.
+        - **Nem támogatja a sched-ext-et**.
 - **linux-cachyos-deckify**
-    - Default kernel for handhelds. It is **not recommended** and **unsupported** to use any other kernel on handhelds other than this kernel.
-    - Uses the BORE scheduler.
-    - Handheld specific patches on top of the base patchset to improve compatibility and overall experience on handheld devices.
+    - Alapértelmezett kernel kézi számítógépekhez. **Nem ajánlott** és **nem támogatott** más kernel használata kézi számítógépeken ezen kívül.
+    - A BORE ütemezőt használja.
+    - Kézi eszközökre specifikus javítások az alap patchkészleten kívül a kézi eszközök kompatibilitásának és az általános felhasználói élmény javítása érdekében.
 - **linux-cachyos-eevdf** 
-    - Tweaks the default kernel scheduler for improved responsiveness.
+    - Módosítja az alapértelmezett kernel ütemezőt a jobb válaszidő érdekében.
 - **linux-cachyos-lts** 
-    - Based on the latest Long Term Support kernel. 
-    - Uses the BORE scheduler.
-    - Minimally patched compared to other kernels to ensure maximum stability.
+    - A legújabb Long Term Support kernel alapján.
+    - A BORE ütemezőt használja.
+    - Minimálisan javított a többi kernelhez képest a maximális stabilitás biztosítása érdekében.
 - **linux-cachyos-hardened**
-    - Uses the BORE scheduler.
-    - Includes [linux-hardened](https://github.com/anthraxx/linux-hardened) patchset. 
-    - Kernel config based on [linux-hardened config](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-hardened/-/blob/main/config).
-        - Contains very aggressive hardening that significantly stifles performance and user experience.
-        - **Does not support sched-ext**.
+    - A BORE ütemezőt használja.
+    - Tartalmazza a [linux-hardened](https://github.com/anthraxx/linux-hardened) patchkészletet.
+    - Kernel konfig a [linux-hardened konfig](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-hardened/-/blob/main/config) alapján.
+        - Nagyon agresszív hardening-et tartalmaz, amely jelentősen rontja a teljesítményt és a felhasználói élményt.
+        - **Nem támogatja a sched-ext-et**.
 - **linux-cachyos-rc**
-    - Based on the latest mainline kernel from [Linus's tree](https://github.com/torvalds/linux/).
-    - Uses the BORE scheduler.
-    - Main kernel to introduce new features in our patchset.
+    - A [Linus fájáról] (https://github.com/torvalds/linux/) származó legújabb mainline kernel alapján.
+    - A BORE ütemezőt használja.
+    - A fő kernel a patchkészletünkbe való új javítások bevezetésére.
 - **linux-cachyos-server**
-    - Tuned for server workloads compared to desktop usage.
-        - 300Hz tickrate.
-        - No preemption.
-        - Stock EEVDF.
+    - Szerver terhelésekhez hangolva az asztali használathoz képest.
+        - 300Hz tickráta.
+        - Nincs preempció.
+        - Gyári EEVDF.
 - **linux-cachyos-rt-bore**
-    - Real-time preemption.
-    - Uses the BORE scheduler.
+    - Valós idejű preempció.
+    - A BORE ütemezőt használja.
 
-Please open an issue in [linux-cachyos GitHub](https://github.com/CachyOS/linux-cachyos) for suggestions and improvements that can be added to the default kernel.
+Javaslatokért és fejlesztésekért, amelyek hozzáadhatók az alapértelmezett kernelhez, kérjük, nyisson meg egy problémát a [linux-cachyos GitHub](https://github.com/CachyOS/linux-cachyos) oldalon.
 
-## Prebuilt Kernel Modules
+## Előreépített kernelmodulok
 
-To accomodate a larger userbase, CachyOS ships some well-known and highly used kernel modules along with the kernel. This means that users will no longer
-have to recompile those modules after every kernel update or on every new kernel install, but will only have to install them from the repository as it is
-already precompiled. This effectively obsoletes any `-dkms` packages that a user might have that provides the same module as the precompiled version.
+A nagyobb felhasználói bázis kiszolgálása érdekében a CachyOS néhány jól ismert és széles körben használt kernel modult is mellékel a kernelhez. Ez azt jelenti, hogy a felhasználóknak többé nem kell újrakompilálniuk ezeket a modulokat minden kernelfrissítés vagy minden új kernel telepítésekor, hanem csak a tárolóból kell telepíteniük őket, mivel az már előre le van kompilálva. Ez gyakorlatilag elavulttá teszi azokat a `-dkms` csomagokat, amelyekkel a felhasználó rendelkezhet, és amelyek ugyanazt a modult biztosítják, mint az előre lekompilált verzió.
 
 ### ZFS
 
-[ZFS](https://openzfs.org/wiki/Main_Page) is one of the many filesystems that is supported in CachyOS. Due to it being licensed under 
-[CDDL](https://opensource.org/license/cddl-1-0), it is incompatible with Linux kernel's license and therefore cannot be merged in-tree. The shipped module includes
-the latest upstream features and fixes to ensure compatibility with the latest kernel.
+A [ZFS](https://openzfs.org/wiki/Main_Page) egyike a CachyOS által támogatott számos fájlrendszernek. Mivel a [CDDL](https://opensource.org/license/cddl-1-0) licenc alatt van, nem kompatibilis a Linux kernel licencével, ezért nem egyesíthető a fában. A szállított modul tartalmazza a legújabb upstream funkciókat és javításokat a legújabb kernellel való kompatibilitás biztosítása érdekében.
 
 ### NVIDIA
 
-CachyOS ships both precompiled versions of the close-sourced and [open-sourced](https://github.com/NVIDIA/open-gpu-kernel-modules/) kernel modules. Due to the development
-of NVIDIA's kernel module being out-of-tree and thus does not follow the kernel's release cadence, the stock configuration can sometimes be incompatible with the latest
-kernel. As a workaround, CachyOS patches the modules with community-created patches or patches shared by NVIDIA directly.
+A CachyOS mind a zárt- és [nyílt-forráskódú](https://github.com/NVIDIA/open-gpu-kernel-modules/) előrekompilált kernel moduljait szállítja. Mivel az NVIDIA kernel moduljának fejlesztése fán kívüli, és így nem követi a kernel kiadási ütemét, a gyári konfiguráció néha inkompatibilis lehet a legújabb
+kernellel. Megoldásként a CachyOS közösség által létrehozott vagy az NVIDIA által közvetlenül megosztott javításokkal javítja a modulokat.
 
-## Other
+## Más modulok
 
-The CachyOS kernel also has some other notable features that are subtle yet improve the user experience
+A CachyOS kernelnek vannak más figyelemre méltó, apró, mégis felhasználói élményt javító funkciói is.
 
-- Includes a debug variant of the kernel that provides an unstripped kernel binary for debugging purposes. This package is needed to profile the kernel with AutoFDO.
-- [Binder](https://developer.android.com/reference/android/os/Binder), the module needed for [Waydroid](https://waydro.id/) is enabled by default in the kernel config
-and already [set up](https://github.com/CachyOS/linux-cachyos/blob/master/linux-cachyos/config#L10559).
+- Tartalmazza a kernel egy debug változatát, amely egy csupaszítatlan kernel bináris fájlt biztosít debugoló célokra. Ez a csomag szükséges a kernel AutoFDO-val történő profilozásához.
+- A [Binder](https://developer.android.com/reference/android/os/Binder), a [Waydroid](https://waydro.id/)-hez szükséges modul alapértelmezés szerint engedélyezve van a kernel konfigurációjában,
+és már [be is van állítva](https://github.com/CachyOS/linux-cachyos/blob/master/linux-cachyos/config#L10559).
 
-## Package Naming Convention
+## Csomagnevezési konvenció
 
 ```sh
-linux-cachyos # Base kernel package for the default kernel. Compiled with clang
-linux-cachyos-gcc # GCC-compiled counterpart for linux-cachyos
-linux-cachyos-{,gcc-}headers # Kernel headers, mainly for building
-linux-cachyos-{,gcc-}nvidia # Precompiled closed source NVIDIA modules for linux-cachyos kernel
+linux-cachyos # Alap kernel csomag az alapértelmezett kernelhez. clang-el kompilálva
+linux-cachyos-gcc # GCC-vel kompilált megfelelője a linux-cachyos-nek
+linux-cachyos-{,gcc-}headers # Kernel fejlécek építéshez
+linux-cachyos-{,gcc-}nvidia # Előkompilált zárt forráskodú NVIDIA modulok a linux-cachyos kernelhez
 linux-cachyos-{,gcc-}nvidia-open
-linux-cachyos-{,gcc-}zfs # Precompiled ZFS modules for linux-cachyos kernel
-linux-cachyos-{,gcc-}dbg # Unstripped linux binary for debugging
+linux-cachyos-{,gcc-}zfs # Előkompilált ZFS modulok a linux-cachyos kernelhez
+linux-cachyos-{,gcc-}dbg # Csupaszítatlan linux bináris fájl hibakereséshez
 
-linux-cachyos-hardened # Base kernel package for the hardened kernel. Compiled with GCC
-linux-cachyos-hardened-lto # clang-compiled counterpart for linux-cachyos-hardened
+linux-cachyos-hardened # Alap kernel csomag a hardened kernelhez. GCC-vel kompilálva
+linux-cachyos-hardened-lto # clang-el kompilált megfelelője a linux-cachyos-hardened-nek
 linux-cachyos-hardened-{,lto-}headers
 linux-cachyos-hardened-{,lto-}nvidia
 linux-cachyos-hardened-{,lto-}nvidia-open
@@ -117,21 +110,20 @@ linux-cachyos-hardened-{,lto-}zfs
 linux-cachyos-hardened-{,lto-}dbg
 ```
 
-## FAQ
+## Gyakik
 
-### Why is AutoFDO not being used for all the other kernel variants?
+### Miért nem használják az AutoFDO-t az összes többi kernelváltozathoz?
 
-Because it's expensive to build since it basically requires building the kernel twice therefore it requires more resources and time dedicated to the compilation. The process of building a kernel with AutoFDO involves the following steps:
+Mert költséges felépíteni, mivel alapvetően kétszer kell felépíteni a kernelt, ezért több erőforrást és időt igényel a kompilálás. Az AutoFDO-val rendelkező kernel építési folyamata a következő lépésekből áll:
 
-1) Build the kernel with AutoFDO and debugging capabilities enabled.
-2) Create a profile meaning executing workloads in order to gather profiling data for the possible optimizations.
-3) Rebuild the kernel with the AutoFDO profile.
+1) A kernel felépítése az AutoFDO és a hibakeresési képességek engedélyezésével.
+2) Profil létrehozása, amely a munkaterhelések végrehajtását jelenti, hogy profilozási adatokat gyűjtsön a lehetséges optimalizáláshoz.
+3) A kernel újraépítése az AutoFDO profillal.
 
-Therefore for now it's only present in the [linux-cachyos](/features/kernel#variants) variant.
+Ezért egyelőre csak a [linux-cachyos](/features/kernel#variants) változatban van jelen.
 
-For more information about AutoFDO, click [here.](https://cachyos.org/blog/2411-kernel-autofdo/)
+Az AutoFDO-ról további információért kattintson [ide.](https://cachyos.org/blog/2411-kernel-autofdo/)
 
-### Does the realtime kernel improve gaming performance?
+### Javítja a valós idejű kernel a játékok teljesítményét?
 
-No, it does not. The realtime kernel makes much more code preemptible compared to a normal fully preemptible kernel. This means that much more tasks (gaming processes
-included) are frequently preempted and will forcefully yield system resources, leading to worse performance.
+Nem. Egy valós idejű kernel sokkal preemptívabbá teszi a kódot, mint egy átlag teljesen preemptív kernel. Ez azt jelenti, hogy sokkal több feladat (játékfolyamatok ideértve) van gyakran preemptálva, és kényszerítetten rendszererőforrási elsőbbséget ad, ami rosszabb teljesítményt eredményez.

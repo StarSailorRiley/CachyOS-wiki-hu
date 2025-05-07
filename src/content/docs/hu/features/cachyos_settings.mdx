@@ -1,125 +1,123 @@
 ---
-title: CachyOS Settings
+title: CachyOS Beállítások
 ---
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 
-Alongside our optimized kernels and repositories, we also provide settings that further improve the desktop experience.
-We also bundle in some helper scripts to for QoL improvements. All these configurations and scripts are under the `cachyos-settings` package.
+Optimalizált kerneljeink és repo-ink mellett olyan beállításokat is biztosítunk, amelyek tovább javítják az asztali élményt.
+A QoL javítása érdekében néhány segítő szkriptet is mellékelünk. Mindezek a konfigurációk és szkriptek a `cachyos-settings` csomag alatt találhatók.
 
-## sysctl Tweaks
+## sysctl finomhangolások
 
-We provide a lot of sysctl tweaks that aims to improve overall desktop performance. Each sysctl entry is well documented
-in the file [`99-cachyos-settings.conf`](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/sysctl.d/99-cachyos-settings.conf)
+Számos sysctl finomhangolást kínálunk, amelyek célja az asztali gép teljesítményének javítása. Minden sysctl bejegyzés részletesen dokumentálva van a [`99-cachyos-settings.conf`](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/sysctl.d/99-cachyos-settings.conf) fájlban.
 
-To make changes to any of these values, copy the original entry and make a new file under `/etc/sysctl.d/` for the modified value.
+A fenti értékek bármelyikének módosításához másolja az eredeti bejegyzést, és hozzon létre egy új fájlt az `/etc/sysctl.d/` alatt a módosított értékhez.
 
-### Modifying sysctl values
+### Sysctl értékek módosítása
 
 <Steps>
 
-1. Take a look at the original value from `cachyos-settings`
+1. Nézd meg az eredeti értéket a `cachyos-settings` fájlból
 
     ```sh
     ❯ cat /usr/lib/sysctl.d/99-cachyos-settings.conf
-    # Only experimental!
-    # Let Realtime tasks run as long they need
-    # sched: RT throttling activated
+    # Csak kísérleti jellegű!
+    # A valós idejű feladatok addig fussanak, amíg szükséges
+    # sched: RT szabályozás aktiválva
     kernel.sched_rt_runtime_us=-1
     ```
 
-2. Make a new file in `/etc/sysctl.d` to make changes to the sysctl settings
+2. Hozz létre egy új fájlt az `/etc/sysctl.d` fájlban a sysctl beállítások módosításához
 
-    ```sh title="Reverting kernel.sched_rt_runtime_us= to its default value"
-    ❯ sudo micro /etc/sysctl.d/99-kernel-sched-rt.conf # If the file doesn't exist, this command creates and lets you edit the file
+    ```sh title="A kernel.sched_rt_runtime_us= visszaállítása az alapértelmezett értékre"
+    ❯ sudo micro /etc/sysctl.d/99-kernel-sched-rt.conf # Ha a fájl nem létezik, ez a parancs létrehozza és lehetővé teszi a fájl szerkesztését
     kernel.sched_rt_runtime_us=950000
     ```
 
 </Steps>
 
-## udev Rules
+## udev Szabályok
 
-- [ZRAM Rules](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/30-zram.rules) - Sets ZRAM swappiness to a more aggressive
-value so cache is more likely to swap to ZRAM
-- [HPET Permissions](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/40-hpet-permissions.rules) - Allows access to `rtc0`
-and `hpet` device nodes by the audio group.
-- [SATA Power Management](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/50-sata.rules) - Sets power management policy of SATA devices to `max_performance`
-- [I/O Scheduler Rules](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/60-ioschedulers.rules) - Selects the optimal scheduler for each drive type (HDD, SSD, NVMe)
-- [hdparm Rules](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/69-hdparm.rules) - Sets SATA and IDE HDDs to maximum performance
-- [NVIDIA RTD3](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/71-nvidia.rules) - Configures dynamic power management functionality for the Turing GPU generation. **RTD3 does not work properly on Turing GPUs with the open modules**
-- [CPU DMA Latency](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/99-cpu-dma-latency.rules) -
-Allows access to the `cpu_dma_latency` device node by the audio group.
+- [ZRAM szabályok](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/30-zram.rules) - Agresszívabb értékre állítja a ZRAM swappiness értékét, így a gyorsítótár nagyobb valószínűséggel cserélődik ZRAM-ra
+- [HPET engedélyek](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/40-hpet-permissions.rules) - Lehetővé teszi az audio csoport számára az `rtc0`
+és `hpet` eszközcsomópontok elérését
+- [SATA energiagazdálkodás](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/50-sata.rules) - A SATA eszközök energiagazdálkodási szabályzatát `max_performance` értékre állítja
+- [I/O ütemező szabályok](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/60-ioschedulers.rules) - Kiválasztja az optimális ütemezőt minden meghajtótípushoz (HDD, SSD, NVMe)
+- [hdparm szabályok](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/69-hdparm.rules) - A SATA és IDE HDD-ket maximális teljesítményre állítja.
+- [NVIDIA RTD3](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/71-nvidia.rules) - Dinamikus energiagazdálkodási funkciókat konfigurál a Turing GPU generációhoz. **Az RTD3 nem működik megfelelően a nyitott modulokkal rendelkező Turing GPU-kon**
+- [CPU DMA késleltetés](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/udev/rules.d/99-cpu-dma-latency.rules) -
+Lehetővé teszi a `cpu_dma_latency` eszközcsomópont elérését az audiocsoport számára.
 
-## modprobe Options
+## modprobe Beállítások
 
-- Forces AMDGPU driver on Southern Islands (GCN 1.0) and Sea Islands (GCN 2.0)
-- Enable [various tweaks](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/modprobe.d/nvidia.conf) for NVIDIA
-- Blacklist watchdog modules
+- AMDGPU illesztőprogram kényszerítése a Southern Islands (GCN 1.0) és Sea Islands (GCN 2.0) rendszereken
+- [Különböző módosítások](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/modprobe.d/nvidia.conf) engedélyezése az NVIDIA számára
+- Figyelőmodulok feketelistára helyezése
 
-## Helper Scripts
+## Segédszkriptek
 
-- **`amdpstate-guided`** - Sets the `amd-pstate` scaling driver to `guided` and switches the CPU governor to `schedutil`
-- **`cachyos-bugreport.sh`** - Collects various logs from `inxi`, `dmesg` and `journalctl` to aid in troubleshooting
-- **`game-performance`** - Wrapper script for `powerprofilesctl` to switch to performance profile on-demand.
-See [Power Profile Switching On Demand](/configuration/gaming#power-profile-switching-on-demand)
-- **`dlss-swapper`** - Wrapper script for forcing the latest DLSS preset in games that support the technology
-- - **`dlss-swapper-dll`** - Like `dlss-swapper`, but requires manually updating the `nvngx_dlss.dll` library shipped with the game; may work with games that have issues with the regular version of the script
-- **`kerver`** - QoL script to show information about the current kernel
-- **`paste-cachyos`** - Script to paste terminal output for text files from the system
+- **`amdpstate-guided`** - Beállítja az `amd-pstate` skálázási illesztőprogramot `guided`-re, és a CPU-vezérlőt `schedutil`-re állítja.
+- **`cachyos-bugreport.sh`** - Különböző logokat gyűjt az `inxi`, `dmesg` és `journalctl` fájlokból a hibaelhárítás elősegítése érdekében.
+- **`game-performance`** - Wrapper szkript a `powerprofilesctl` igény szerinti teljesítményprofilra való váltásához.
+Lásd: [Teljesítményprofil váltás igény szerint](/configuration/gaming#power-profile-switching-on-demand)
+- **`dlss-swapper`** - Wrapper szkript a legújabb DLSS előbeállítás kikényszerítéséhez a technológiát támogató játékokban.
+- - **`dlss-swapper-dll`** - Mint a `dlss-swapper`, de manuálisan frissíti a játékkal szállított `nvngx_dlss.dll` könyvtárat. működhet olyan játékokkal, amelyeknél problémák vannak a szkript normál verziójával
+- **`kerver`** - QoL szkript az aktuális kernel információinak megjelenítéséhez
+- **`paste-cachyos`** - Szkript a rendszer szövegfájljainak terminálkimenetek beillesztéséhez
 
     <Tabs>
-        <TabItem label="Uploading text files">
+        <TabItem label="Szöveges fájlok feltöltése">
             ```sh
             ❯ paste-cachyos /path/to/file
             ```
         </TabItem>
-        <TabItem label="Uploading Terminal Output">
+        <TabItem label="Terminál kimenetének feltöltése">
             ```sh
             ❯ <command> | paste-cachyos
             ```
         </TabItem>
     </Tabs>
 - [`pci-latency`](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/bin/pci-latency)
-    ```sh title="Enabling pci-latency system-wide"
+    ```sh title="PCI-latencia engedélyezése rendszerszinten"
     ❯ sudo systemctl enable --now pci-latency.service
     ```
-- **`sbctl-batch-sign`** - Helper script to easily sign kernel images and EFI binaries for secure boot and saves them to sbctl's
-database
-- **`topmem`** - Shows RAM & swap & ksm stats of 10 processes in a descending order.
+- **`sbctl-batch-sign`** - Segédszkript a kernel képek és EFI binárisok egyszerű aláírásához a biztonságos rendszerindításhoz, és mentésükhöz az sbctl
+adatbázisába
+- **`topmem`** - 10 folyamat RAM, swap és ksm statisztikáit mutatja csökkenő sorrendben.
 
 
-## Other configurations
+## Egyéb konfigurációk
 
-### Memory Usage Tweaks
+### Memóriahasználat finomhangolások
 
-- THP Shrinker configuration (max_ptes_none = 409)
-- Set maximum size to 50MB for the systemd journal
-- [ZRAM Generator](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/systemd/zram-generator.conf) - Sets ZRAM to the same size as RAM and use ZSTD for compression
+- THP Shrinker konfiguráció (max_ptes_none = 409)
+- A systemd journal maximális méretének 50 MB-ra állítása
+- [ZRAM generátor](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/systemd/zram-generator.conf) - A ZRAM-ot a RAM méretével megegyezőre állítja, és ZSTD-t használ a tömörítéshez
 
-### Ananicy-cpp Rules
+### Ananicy-cpp szabályok
 
-- [ananicy-cpp](https://gitlab.com/ananicy-cpp/ananicy-cpp) with [community-maintained rulesets](https://github.com/CachyOS/ananicy-rules)
+- [ananicy-cpp](https://gitlab.com/ananicy-cpp/ananicy-cpp) [közösségileg fenntartott szabálykészletekkel](https://github.com/CachyOS/ananicy-rules)
 
-### Network Modifications
+### Hálózati módosítások
 
-- [systemd-resolved as the default DNS Resolver](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/NetworkManager/conf.d/dns.conf) for NetworkManager
+- [systemd-resolved alapértelmezett DNS Resolverként](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/NetworkManager/conf.d/dns.conf) a NetworkManagerhez
 
 ### RTC
 
-- Increase highest requested RTC interrupt frequency to **3072**
+- A legmagasabb requested RTC interrupt frequency növelése **3072**-re
 
 ### NTP QoL
 
-- Preferred server set to **Cloudflare**
-- Fallback servers > **Google and Arch Linux**
+- Az előnyben részesített szerver **Cloudflare**-re van állítva
+- Tartalék szerverek > **Google és Arch Linux**
 
-### systemd Services Tweaks
+### systemd szolgáltatások finomhangolása
 
-- Timeout for starting a service/unit set to **15s**
-- Timeout for stopping a service/unit set to **10s**
-- Soft limit for opened file descriptors set to **2048**
-- Hard limit for opened file descriptors set to **2097152**
+- A service/unit indításának időkorlátja **15s**-re van állítva
+- A service/unit leállításának időkorlátja **10s**-re van állítva
+- A megnyitott fájlleírók soft limitje **2048**-ra van állítva
+- A megnyitott fájlleírók hard limitje **2097152**-re van állítva
 
 ### X.Org
 
-- Enable [Tap to Click](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/share/X11/xorg.conf.d/20-touchpad.conf) by default for all X11 sessions
+- [Tap to Click](https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/share/X11/xorg.conf.d/20-touchpad.conf) alapértelmezett engedélyezése az összes X11 munkamenethez

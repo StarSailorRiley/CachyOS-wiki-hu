@@ -1,29 +1,27 @@
 ---
-title: CachyOS Hardware Detection
-description: Hardware Detection and Configuration for CachyOS
+title: CachyOS hardverfelismerő
+description: Hardverészlelés és -konfigurálás a CachyOS-hez
 ---
 
-[CachyOS Hardware Detection](https://github.com/CachyOS/chwd/) or better known as **`chwd`** enables us to power a variety of hardware by installing the necessary
-packages and drivers for the running system. This includes systems running NVIDIA's graphics cards, T2 Macbooks and handheld devices such as Steam Deck and ROG Ally.
+A [CachyOS hardverészlelés](https://github.com/CachyOS/chwd/), vagy ismertebb nevén **`chwd`** lehetővé teszi számunkra, hogy különféle hardvereket működtessünk a futó rendszerhez szükséges csomagok és illesztőprogramok telepítésével. Ide tartoznak az NVIDIA videokártyát futtató rendszerek, a T2-es Macbookok, és a kézi eszközök mint a Steam Deckek és a ROG Ally.
 
-## Usage
+## Használat
 
-**`chwd`** is typically ran during installation time to provide the necessary packages for the system. However, it is also possible
-to use it post-install.
+A **`chwd`** parancs jellemzően a telepítés során lefut, hogy biztosítsa a rendszer számára a szükséges csomagokat. Azonban a telepítés után is használható.
 
-### Auto Configuration
+### Automatikus konfiguráció
 
-**`chwd`** supports installing and configuring necessary drivers and packages so that the system can work at optimal conditions.
+A **`chwd`** támogatja a szükséges illesztőprogramok és csomagok telepítését és konfigurálását, hogy a rendszer optimális körülmények között működjön.
 
 ```sh
 ❯ sudo chwd -a
 ```
 
-### Installing a profile
+### Profil telepítése
 
-An alternative to the above method is to install each specific profile.
+A fenti módszer alternatívája az egyes profilok telepítése.
 
-```sh title='List all available profiles'
+```sh title='Az összes elérhető profil listázása'
 ❯ chwd --list-all
 ╭─────────────────────────┬─────────╮
 │ Name                    ┆ NonFree │
@@ -44,34 +42,34 @@ An alternative to the above method is to install each specific profile.
 ╰─────────────────────────┴─────────╯
 ```
 
-```sh title='Installing a chwd profile'
+```sh title='chwd profil telepítése'
 ❯ sudo chwd -i amd
 > Installing amd ...
 
 > Successfully installed amd
 ```
 
-### Others
+### Más lehetőségek
 
-Consult the help output of **`chwd`** for command syntax and other usage.
+A parancs szintaxisával és egyéb használati módokkal kapcsolatban tekintse meg a **`chwd`** help kimenetét.
 
 ```sh
 ❯ chwd --help
 Usage: chwd [OPTIONS]
 
 Options:
-  -i, --install <profile>          Install profile
-  -r, --remove <profile>           Remove profile
-  -d, --detail                     Show detailed info for listings
-  -f, --force                      Force reinstall
-      --list-installed             List installed kernels
-      --list                       List available profiles for all devices
-      --list-all                   List all profiles
-  -a, --autoconfigure [<classid>]  Autoconfigure
-      --ai_sdk                     Toggle AI SDK profiles
+  -i, --install <profile>          Install profile # Profil telepítése
+  -r, --remove <profile>           Remove profile # Profil eltávolítása
+  -d, --detail                     Show detailed info for listings # Listázás részletes információ mutatása 
+  -f, --force                      Force reinstall # Kényszerített újratelepítés
+      --list-installed             List installed kernels # Telepített kernelek listázása
+      --list                       List available profiles for all devices # Elérhető profilok listázása az összes eszközre
+      --list-all                   List all profiles # Összes profil listázása
+  -a, --autoconfigure [<classid>]  Autoconfigure # Autokonfiguráció
+      --ai_sdk                     Toggle AI SDK profiles # AI SDK profilok ki/bekapcsolása
       --pmcachedir <PMCACHEDIR>    [default: /var/cache/pacman/pkg]
       --pmconfig <PMCONFIG>        [default: /etc/pacman.conf]
       --pmroot <PMROOT>            [default: /]
-  -h, --help                       Print help
-  -V, --version                    Print version
+  -h, --help                       Print help # Súgó
+  -V, --version                    Print version # Verzió
 ```
