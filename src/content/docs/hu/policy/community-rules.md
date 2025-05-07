@@ -1,18 +1,18 @@
 ---
-title: Official CachyOS Community Rules
-description: Discord, Reddit, Twitter, Forum, Telegram
+title: Hivatalos CachyOS közösségi szabályok
+description: Discord, Reddit, Twitter, Fórum, Telegram
 ---
 
-Violating these rules is not allowed and account ban will follow:
+Ezen szabályok megszegése tilos, és a fiók kitiltását vonja maga után:
 
-1. Insulting community participants is prohibited.
-2. Incitement of ethnic hatred is prohibited.
-3. The posting of pornographic materials is prohibited.
-4. Discussion of political topics is prohibited when it gets out of control.
-5. Discussion of religious topics is prohibited.
-6. It is forbidden to advertise other resources without the consent of the administration.
-7. It is forbidden to impersonate another person.
-8. It is forbidden to flood (publish the same type of information several times in a row).
-9. It is forbidden to provoke conflicts between participants.
-10. This is a LGBTQ+ safe place, and so it is forbidden to provoke and insult LGBTQ+ people.
+1. Tilos a közösség tagjainak sértegetése.
+2. Tilos az etnikai gyűlöletkeltés.
+3. Tilos a pornográf anyagok közzététele.
+4. Tilos politikai témákról beszélni, ha irányíthatatlanná válnak.
+5. Tilos vallási témákról beszélni.
+6. Tilos más erőforrásokat hirdetni az adminisztráció beleegyezése nélkül.
+7. Tilos más személynek kiadni magát.
+8. Tilos a floodolás (ugyanazon típusú információ többszöri közzététele egymás után).
+9. Tilos a résztvevők között konfliktust provokálni.
+10. Ez egy LMBTQ+ safe space, tehát tilos az LMBTQ+ embereket provokálni és sértegetni.
 

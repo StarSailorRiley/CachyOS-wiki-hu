@@ -1,18 +1,18 @@
 ---
-title: Donation
-description: Ways to support us
+title: Adományozás
+description: Támogatási módok
 ---
 
-If you want to support our work, you can donate us and help to pay our buildservers.
-Every Donator gets a Donator Rank in our Discord.
+Ha támogatni szeretnéd a munkánkat, adományozhatsz nekünk, és hozzájárulhatsz a buildszervereink finanszírozásához.
+Minden adományozó "Donator" rangot kap a Discordunkon.
 
-Here a list of the current costs per months:
+Íme a jelenlegi havi költségek listája:
 
-- Buildserver 127 € (Hetzner 7950X3D)
-- Second Buildserver 70€ (Hetzner 7700X)
-- Webserver/mirror 17 €
-- Mailserver/mirror 17 €
-- Forum Server (Netcup VPS) 7 Euro
+- Buildszerver 127 € (Hetzner 7950X3D)
+- Második Buildszerver 70€ (Hetzner 7700X)
+- Webszerver/tükör 17 €
+- Levelezőszerver/tükör 17 €
+- Fórumszerver (Netcup VPS) 7 €
 
 ### Patreon
 
